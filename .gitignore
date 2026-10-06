@@ -112,3 +112,7 @@ _ide_helper.php
 /.cursor/
 /.zed
 /.nova
+
+# Archives & Sync dumps
+*.tar.gz
+*.zip
