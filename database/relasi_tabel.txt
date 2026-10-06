@@ -1,0 +1,124 @@
+================================================================================
+          DOKUMENTASI RELASI ANTAR TABEL (DATABASE SCHEMA ERD)
+        WEBSITE YAYASAN BAKTI UMAT NUSANTARA (BUM) CABANG PONTIANAK
+                   Berdasarkan PRD-BUM-2026-01 (v1.1)
+================================================================================
+
+--------------------------------------------------------------------------------
+A. RINGKASAN 11 TABEL
+--------------------------------------------------------------------------------
+1.  pengguna             : Data akun pengurus dan administrator website.
+2.  program              : Master kategori program (Jumat Berkah, Tahsin & Tahfiz, Santunan & Zakat).
+3.  katalog              : Detail item atau paket program yang ditampilkan di katalog publik.
+4.  artikel              : Berita, artikel, dan dokumentasi tulisan kegiatan yayasan.
+5.  kegiatan             : Agenda acara dan kegiatan sosial yayasan.
+6.  foto_kegiatan        : Galeri foto dokumentasi untuk setiap agenda kegiatan.
+7.  donatur              : Master data donatur beserta riwayat kontribusinya.
+8.  rekening_bank        : Rekening bank resmi dan QRIS tujuan transfer donasi.
+9.  donasi               : Transaksi donasi masuk (Kategori: Jumat Berkah, Uang Donasi, Uang Pembangunan).
+10. transaksi_keuangan   : Pencatatan arus kas (pemasukan & pengeluaran) untuk laporan dashboard.
+11. pengaturan           : Konfigurasi website (profil, legalitas, sejarah, visi misi, kontak).
+
+--------------------------------------------------------------------------------
+B. DETAIL RELASI ANTAR TABEL (FOREIGN KEY & KARDINALITAS)
+--------------------------------------------------------------------------------
+
+1. Tabel: program ---> katalog
+   - Kolom Primary Key   : program.id
+   - Kolom Foreign Key   : katalog.program_id
+   - Kardinalitas        : 1 : N (One to Many)
+   - Aturan Hapus        : ON DELETE CASCADE
+   - Penjelasan          : Satu program utama (misal: Jumat Berkah) dapat memiliki 
+                           banyak paket/item katalog. Jika program dihapus, katalognya
+                           ikut terhapus.
+
+2. Tabel: program ---> artikel
+   - Kolom Primary Key   : program.id
+   - Kolom Foreign Key   : artikel.program_id
+   - Kardinalitas        : 1 : N (One to Many)
+   - Aturan Hapus        : ON DELETE SET NULL
+   - Penjelasan          : Digunakan untuk fitur filter artikel berdasarkan program. 
+                           Satu program memiliki banyak artikel. Jika program dihapus,
+                           artikel tetap ada dengan program_id menjadi NULL.
+
+3. Tabel: pengguna ---> artikel
+   - Kolom Primary Key   : pengguna.id
+   - Kolom Foreign Key   : artikel.penulis_id
+   - Kardinalitas        : 1 : N (One to Many)
+   - Aturan Hapus        : ON DELETE CASCADE
+   - Penjelasan          : Setiap artikel wajib mencatat siapa admin/pengurus yang 
+                           menulis atau mempublikasikannya.
+
+4. Tabel: kegiatan ---> foto_kegiatan
+   - Kolom Primary Key   : kegiatan.id
+   - Kolom Foreign Key   : foto_kegiatan.kegiatan_id
+   - Kardinalitas        : 1 : N (One to Many)
+   - Aturan Hapus        : ON DELETE CASCADE
+   - Penjelasan          : Satu agenda kegiatan memiliki banyak foto dokumentasi dalam 
+                           galeri. Jika kegiatan dihapus, semua foto terkait ikut terhapus.
+
+5. Tabel: donatur ---> donasi
+   - Kolom Primary Key   : donatur.id
+   - Kolom Foreign Key   : donasi.donatur_id
+   - Kardinalitas        : 1 : N (One to Many)
+   - Aturan Hapus        : ON DELETE SET NULL
+   - Penjelasan          : Satu donatur dapat berdonasi berkali-kali. Jika data master 
+                           donatur dihapus, riwayat transaksi donasi tidak hilang demi 
+                           audit keuangan (kolom donatur_id diubah menjadi NULL).
+
+6. Tabel: rekening_bank ---> donasi
+   - Kolom Primary Key   : rekening_bank.id
+   - Kolom Foreign Key   : donasi.rekening_bank_id
+   - Kardinalitas        : 1 : N (One to Many)
+   - Aturan Hapus        : ON DELETE SET NULL
+   - Penjelasan          : Menghubungkan donasi yang masuk dengan rekening bank yayasan 
+                           tujuan transfer.
+
+7. Tabel: pengguna ---> donasi
+   - Kolom Primary Key   : pengguna.id
+   - Kolom Foreign Key   : donasi.diverifikasi_oleh
+   - Kardinalitas        : 1 : N (One to Many)
+   - Aturan Hapus        : ON DELETE SET NULL
+   - Penjelasan          : Mencatat petugas admin yang memverifikasi keabsahan bukti 
+                           transfer donasi.
+
+8. Tabel: donasi ---> transaksi_keuangan
+   - Kolom Primary Key   : donasi.id
+   - Kolom Foreign Key   : transaksi_keuangan.donasi_id
+   - Kardinalitas        : 1 : 1 (One to One)
+   - Aturan Hapus        : ON DELETE SET NULL
+   - Penjelasan          : Setiap donasi yang telah diverifikasi dicatat secara otomatis 
+                           ke dalam buku kas umum (arus kas pemasukan).
+
+9. Tabel: pengguna ---> transaksi_keuangan
+   - Kolom Primary Key   : pengguna.id
+   - Kolom Foreign Key   : transaksi_keuangan.dicatat_oleh
+   - Kardinalitas        : 1 : N (One to Many)
+   - Aturan Hapus        : ON DELETE RESTRICT
+   - Penjelasan          : Setiap transaksi keuangan (baik pemasukan maupun pengeluaran)
+                           wajib mencatat siapa pengurus yang menginput. Admin yang sudah 
+                           memiliki riwayat transaksi tidak boleh sembarangan dihapus (RESTRICT).
+
+--------------------------------------------------------------------------------
+C. DIAGRAM TEKS SKEMATIK RELASI
+--------------------------------------------------------------------------------
+
+[pengguna] ──────(1:N)──────> [artikel] <──────(N:1)────── [program]
+    │                                                           │
+    │                                                           └───(1:N)───> [katalog]
+    │
+    ├───(1:N)───> [transaksi_keuangan] <───(1:1)─── [donasi]
+    │                     ▲                            ▲
+    │                     │                            ├───(N:1)─── [donatur]
+    └───(1:N)─────────────┴──────(verifikasi)──────────┴───(N:1)─── [rekening_bank]
+
+[kegiatan] ──────(1:N)──────> [foto_kegiatan]
+
+[pengaturan] (Tabel Konfigurasi Mandiri / Standalone)
+
+================================================================================
+Keterangan Notasi:
+(1:N) = One to Many (Satu ke Banyak)
+(1:1) = One to One (Satu ke Satu)
+(N:1) = Many to One (Banyak ke Satu)
+================================================================================

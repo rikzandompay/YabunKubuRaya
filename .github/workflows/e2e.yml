@@ -1,0 +1,58 @@
+name: Playwright E2E Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-e2e:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup PHP 8.4
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, sqlite3, fileinfo
+        coverage: none
+
+    - name: Install Composer Dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install NPM Dependencies
+      run: npm ci
+
+    - name: Setup Application Environment
+      run: |
+        cp .env.example .env
+        touch database/database.sqlite
+        php artisan key:generate
+        php artisan migrate --force
+        php artisan db:seed --class=E2ETestSeeder
+        npm run build
+
+    - name: Install Playwright Chromium with OS Dependencies
+      run: npx playwright install --with-deps chromium
+
+    - name: Run Playwright E2E Tests (CI Mode)
+      run: npm run test:e2e:ci
+
+    - name: Upload Playwright Test Report Artifact
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 14

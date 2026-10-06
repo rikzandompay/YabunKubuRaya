@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+
+@source '../views/**/*.blade.php';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --color-brand: #00843D;
+    --color-brand-DEFAULT: #00843D;
+    --color-brand-dark: #006B31;
+    --color-emerald-primary: #00843D;
+    --color-emerald-dark: #006B31;
+    --color-emerald-light: #10B981;
+}
+
+html,
+body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+::selection {
+    background-color: #007A4D;
+    color: #ffffff;
+}
+
+/* Custom Utilities */
+.heading {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* Toast Animation */
+@keyframes slideDownFade {
+    0% {
+        transform: translate(-50%, -20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.toast-in {
+    animation: slideDownFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================== */
+/* SCROLL REVEAL ANIMATIONS (Sesuai folder OT)                     */
+/* ============================================================== */
+[data-reveal] {
+    opacity: 0;
+    will-change: transform, opacity;
+    transition-property: opacity, transform;
+    transition-duration: var(--reveal-duration, 0.6s);
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0s);
+}
+
+/* Direction: Up (default) */
+[data-reveal],
+[data-reveal="up"] {
+    transform: translate3d(0, 40px, 0);
+}
+
+/* Direction: Down */
+[data-reveal="down"] {
+    transform: translate3d(0, -40px, 0);
+}
+
+/* Direction: Left (slides in from right to left, initial x: 40px) */
+[data-reveal="left"] {
+    transform: translate3d(40px, 0, 0);
+}
+
+/* Direction: Right (slides in from left to right, initial x: -40px) */
+[data-reveal="right"] {
+    transform: translate3d(-40px, 0, 0);
+}
+
+/* Revealed State */
+[data-reveal].is-revealed {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+}
+
+/* Stagger Delays */
+[data-reveal-delay="100"] { --reveal-delay: 100ms; }
+[data-reveal-delay="150"] { --reveal-delay: 150ms; }
+[data-reveal-delay="200"] { --reveal-delay: 200ms; }
+[data-reveal-delay="300"] { --reveal-delay: 300ms; }
+[data-reveal-delay="400"] { --reveal-delay: 400ms; }
+[data-reveal-delay="500"] { --reveal-delay: 500ms; }
+
+/* Duration options */
+[data-reveal-duration="500"] { --reveal-duration: 0.5s; }
+[data-reveal-duration="600"] { --reveal-duration: 0.6s; }
+[data-reveal-duration="800"] { --reveal-duration: 0.8s; }
+
+/* Accessibility: respect user's reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}

@@ -1,0 +1,110 @@
+# ==============================================================
+# AI TOOLS, AGENTS & PROMPT CONFIGURATIONS (EXCLUDED FROM GITHUB)
+# ==============================================================
+/.agents/
+/.claude/
+/.codex/
+/.kilo/
+/.ai/
+/.strix/
+/.gemini/
+/.antigravity/
+/.antigravity-ide/
+/.hermes/
+/.cline/
+AGENTS.md
+CLAUDE.md
+PROMPTS.md
+boost.json
+opencode.json
+.mcp.json
+
+# ==============================================================
+# PRD, PROPOSALS & SPECIFICATION DOCUMENTS (EXCLUDED FROM GITHUB)
+# ==============================================================
+PRD.md
+*PRD*
+*prd*
+*Proposal*
+*proposal*
+
+# ==============================================================
+# SECRETS, CREDENTIALS & API KEYS
+# ==============================================================
+.env
+.env.*
+!.env.example
+/auth.json
+.npmrc
+.yarnrc
+*token*.json
+*tokens*.json
+*token*.txt
+api_key*
+apikey*
+*secret*.json
+credentials*.json
+service-account*.json
+client_secret*.json
+oauth-*.json
+firebase*.json
+
+# SSL/TLS certificates and private encryption keys
+*.key
+*.pem
+*.crt
+*.cer
+*.pfx
+*.p12
+*.keystore
+/storage/*.key
+
+# ==============================================================
+# DATABASE & LOCAL STORAGE
+# ==============================================================
+*.sqlite
+*.sqlite-journal
+*.sqlite3
+*.db
+*.sql
+*.sql.gz
+/storage/pail
+
+# ==============================================================
+# LOGS & CACHES
+# ==============================================================
+*.log
+.phpunit.result.cache
+/.phpunit.cache
+
+# ==============================================================
+# DEPENDENCIES & BUILD ARTIFACTS
+# ==============================================================
+/node_modules
+/vendor
+/public/build
+/public/hot
+/public/storage
+/public/fonts-manifest.dev.json
+
+# ==============================================================
+# TESTING & COVERAGE
+# ==============================================================
+/playwright/.auth
+/playwright-report
+/test-results
+
+# ==============================================================
+# IDE & SYSTEM CONFIGURATIONS
+# ==============================================================
+.DS_Store
+Thumbs.db
+Homestead.json
+Homestead.yaml
+_ide_helper.php
+.phpactor.json
+/.idea
+/.vscode
+/.cursor/
+/.zed
+/.nova

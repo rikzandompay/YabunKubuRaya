@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Providers;
+
+use App\Models\Article;
+use App\Models\Donatur;
+use App\Models\FinancialTransaction;
+use App\Models\GalleryPhoto;
+use App\Models\Katalog;
+use App\Models\Pengaturan;
+use App\Models\RekeningBank;
+use App\Policies\ArticlePolicy;
+use App\Policies\DonaturPolicy;
+use App\Policies\FinancialTransactionPolicy;
+use App\Policies\GalleryPhotoPolicy;
+use App\Policies\KatalogPolicy;
+use App\Policies\RekeningBankPolicy;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        // Register policies untuk otorisasi admin
+        Gate::policy(FinancialTransaction::class, FinancialTransactionPolicy::class);
+        Gate::policy(Donatur::class, DonaturPolicy::class);
+        Gate::policy(GalleryPhoto::class, GalleryPhotoPolicy::class);
+        Gate::policy(Article::class, ArticlePolicy::class);
+        Gate::policy(Katalog::class, KatalogPolicy::class);
+        Gate::policy(RekeningBank::class, RekeningBankPolicy::class);
+
+        // SECURITY: Rate limit login attempts untuk mencegah brute force
+        RateLimiter::for('login', function (Request $request) {
+            return Limit::perMinute(5)->by($request->ip());
+        });
+
+        // Bagikan data pengaturan profil yayasan dan rekening bank aktif ke landing page & footer
+        view()->composer(['layouts.app', 'welcome', 'components.footer', 'sections.*'], function ($view) {
+            try {
+                $settings = Pengaturan::all()->pluck('nilai', 'kunci')->toArray();
+                $bankAccounts = RekeningBank::where('status_aktif', true)->orderBy('id')->get();
+            } catch (\Throwable $e) {
+                $settings = [];
+                $bankAccounts = collect();
+            }
+
+            $view->with('siteSettings', $settings);
+            $view->with('bankAccounts', $bankAccounts);
+        });
+    }
+}
