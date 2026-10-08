@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Galeri Dokumentasi Kegiatan — Yayasan BUM Pontianak')
-@section('meta_description', 'Kumpulan dokumentasi foto penyaluran bantuan sosial, santunan dhuafa, beasiswa santri, dan kegiatan keagamaan Yayasan Bakti Umat Nusantara Cabang Pontianak.')
+@section('title', 'Galeri Dokumentasi Kegiatan — Yayasan Bakti Umat Nusantara Cabang Kubu Raya')
+@section('meta_description', 'Kumpulan dokumentasi foto penyaluran bantuan sosial, santunan dhuafa, beasiswa santri, dan kegiatan keagamaan Yayasan Bakti Umat Nusantara Cabang Kubu Raya.')
 @section('canonical_url', route('galeri.index'))
 
 @section('content')
@@ -23,7 +23,7 @@
                 Galeri Dokumentasi Kegiatan
             </h1>
             <p class="mt-3 text-base md:text-lg text-[#4B5563]">
-                Dokumentasi nyata aksi kemanusiaan, penyaluran amanah donatur, serta kegiatan sosial dan dakwah Yayasan Bakti Umat Nusantara Cabang Pontianak.
+                Dokumentasi nyata aksi kemanusiaan, penyaluran amanah donatur, serta kegiatan sosial dan dakwah Yayasan Bakti Umat Nusantara Cabang Kubu Raya.
             </p>
         </div>
 

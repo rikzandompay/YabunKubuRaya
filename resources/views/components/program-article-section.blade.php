@@ -10,7 +10,7 @@
                 Program Artikel
             </h2>
             <p class="mt-2 text-base lg:text-lg text-[#4B5563] font-normal">
-                Berita dan cerita kegiatan Yayasan BUM Pontianak
+                Berita dan cerita kegiatan Yayasan Bakti Umat Nusantara Cabang Kubu Raya
             </p>
         </div>
 
@@ -22,6 +22,7 @@
                     
                     <!-- Link Pembungkus Utama -->
                     <a href="{{ route('artikel.index', ['kategori' => $cat->slug]) }}" 
+                       aria-label="Lihat artikel kategori {{ $cat->name }}"
                        class="flex flex-col h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2">
                         
                         <!-- a. Gambar Header (16:9, rounded-xl 12px, zoom hover) -->
@@ -30,7 +31,7 @@
                                  alt="Gambar Kategori {{ $cat->name }}"
                                  width="450"
                                  height="250"
-                                 loading="lazy"
+                                 loading="lazy" decoding="async"
                                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
                         </div>
 
@@ -60,10 +61,12 @@
             @empty
                 <!-- Fallback Static Cards jika database kosong -->
                 <div class="article-card-item group flex flex-col h-full opacity-0 translate-y-4 transition-all duration-700 ease-out">
-                    <a href="{{ route('artikel.index', ['kategori' => 'keagamaan']) }}" class="flex flex-col h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2">
+                    <a href="{{ route('artikel.index', ['kategori' => 'keagamaan']) }}" 
+                       aria-label="Lihat artikel kategori Keagamaan"
+                       class="flex flex-col h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2">
                         <div class="relative w-full aspect-[16/9] lg:h-[250px] overflow-hidden rounded-xl bg-gray-200">
                             <img src="{{ asset('images/program/keagamaan.jpeg') }}" 
-                                 alt="Gambar Kategori Keagamaan" width="450" height="250" loading="lazy" 
+                                 alt="Gambar Kategori Keagamaan" width="450" height="250" loading="lazy" decoding="async"
                                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
                         </div>
                         <h3 class="text-2xl font-semibold text-[#111111] mt-5 group-hover:text-[#00843D] transition-colors duration-300">Keagamaan</h3>
@@ -80,10 +83,12 @@
                 </div>
 
                 <div class="article-card-item group flex flex-col h-full opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: 100ms;">
-                    <a href="{{ route('artikel.index', ['kategori' => 'pendidikan']) }}" class="flex flex-col h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2">
+                    <a href="{{ route('artikel.index', ['kategori' => 'pendidikan']) }}" 
+                       aria-label="Lihat artikel kategori Pendidikan"
+                       class="flex flex-col h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2">
                         <div class="relative w-full aspect-[16/9] lg:h-[250px] overflow-hidden rounded-xl bg-gray-200">
                             <img src="{{ asset('images/program/pendidikan.jpeg') }}" 
-                                 alt="Gambar Kategori Pendidikan" width="450" height="250" loading="lazy" 
+                                 alt="Gambar Kategori Pendidikan" width="450" height="250" loading="lazy" decoding="async"
                                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
                         </div>
                         <h3 class="text-2xl font-semibold text-[#111111] mt-5 group-hover:text-[#00843D] transition-colors duration-300">Pendidikan</h3>
@@ -100,10 +105,12 @@
                 </div>
 
                 <div class="article-card-item group flex flex-col h-full opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: 200ms;">
-                    <a href="{{ route('artikel.index', ['kategori' => 'sosial']) }}" class="flex flex-col h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2">
+                    <a href="{{ route('artikel.index', ['kategori' => 'sosial']) }}" 
+                       aria-label="Lihat artikel kategori Sosial"
+                       class="flex flex-col h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2">
                         <div class="relative w-full aspect-[16/9] lg:h-[250px] overflow-hidden rounded-xl bg-gray-200">
                             <img src="{{ asset('images/program/sosial.jpeg') }}" 
-                                 alt="Gambar Kategori Sosial" width="450" height="250" loading="lazy" 
+                                 alt="Gambar Kategori Sosial" width="450" height="250" loading="lazy" decoding="async"
                                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
                         </div>
                         <h3 class="text-2xl font-semibold text-[#111111] mt-5 group-hover:text-[#00843D] transition-colors duration-300">Sosial</h3>

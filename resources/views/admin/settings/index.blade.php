@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Pengaturan Sistem & Yayasan — Admin YABUN Pontianak')
+@section('title', 'Pengaturan Sistem & Yayasan — Admin YABUN Cabang Kubu Raya')
 @section('breadcrumb', 'Pengaturan')
 
 @section('content')
@@ -82,7 +82,7 @@
                     <div>
                         <label class="block text-xs font-semibold text-[#1E293B] mb-1">Nama Resmi Lembaga / Yayasan</label>
                         <input type="text" name="nama_yayasan" required
-                            value="{{ old('nama_yayasan', $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Pontianak') }}"
+                            value="{{ old('nama_yayasan', $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya') }}"
                             class="w-full px-3 py-2 text-sm bg-white border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#065F46] focus:border-transparent outline-none">
                     </div>
 
@@ -97,7 +97,7 @@
                     <div>
                         <label class="block text-xs font-semibold text-[#1E293B] mb-1">Alamat Email Resmi</label>
                         <input type="email" name="email" required
-                            value="{{ old('email', $settings['email'] ?? 'kontak@bum-pontianak.org') }}"
+                            value="{{ old('email', $settings['email'] ?? 'kontak@yabunkuburaya.org') }}"
                             class="w-full px-3 py-2 text-sm bg-white border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#065F46] focus:border-transparent outline-none">
                     </div>
 
@@ -228,14 +228,14 @@
                 <div>
                     <label class="block text-xs font-semibold text-[#1E293B] mb-1">Nama Lengkap Administrator</label>
                     <input type="text" name="nama" required
-                        value="{{ old('nama', $user->nama ?? 'Admin BUM Pontianak') }}"
+                        value="{{ old('nama', $user->nama ?? 'Admin Bakti Umat Nusantara Cabang Kubu Raya') }}"
                         class="w-full px-3 py-2 text-sm bg-white border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#065F46] focus:border-transparent outline-none">
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-[#1E293B] mb-1">Alamat Email Login</label>
                     <input type="email" name="email" required
-                        value="{{ old('email', $user->email ?? 'admin@bum-pontianak.org') }}"
+                        value="{{ old('email', $user->email ?? 'admin@yabunkuburaya.org') }}"
                         class="w-full px-3 py-2 text-sm bg-white border border-[#CBD5E1] rounded-lg focus:ring-2 focus:ring-[#065F46] focus:border-transparent outline-none">
                 </div>
 

@@ -10,10 +10,11 @@
                     Galeri Kegiatan
                 </h2>
                 <p class="mt-2 text-base md:text-lg font-normal text-[#6B7280]">
-                    Dokumentasi kegiatan sosial Yayasan Bakti Umat Nusantara Pontianak
+                    Dokumentasi kegiatan sosial Yayasan Bakti Umat Nusantara Cabang Kubu Raya
                 </p>
             </div>
             <a href="{{ route('galeri.index') }}"
+                aria-label="Lihat semua foto galeri kegiatan"
                 class="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-[#00843D] hover:text-[#006B31] transition-colors group">
                 <span>Lihat Semua Foto</span>
                 <svg class="w-4 h-4 stroke-current stroke-2 fill-none transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24">
@@ -131,6 +132,7 @@
         <!-- TOMBOL LIHAT SEMUA GALERI -->
         <div class="mt-10 md:mt-12 text-center">
             <a href="{{ route('galeri.index') }}"
+                aria-label="Lihat semua galeri kegiatan dokumentasi"
                 class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[#00843D] text-white font-semibold text-sm hover:bg-[#006B31] shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2 group cursor-pointer">
                 <span>Lihat Semua Galeri</span>
                 <svg class="w-4 h-4 stroke-current stroke-2 fill-none transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24">

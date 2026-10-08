@@ -17,7 +17,7 @@
                 </h2>
                 <div class="space-y-3 text-[#555555] text-justify" style="font-size: 0.9375rem; lineHeight: 1.75;">
                     <p>
-                        {{ !empty($siteSettings['program_unggulan']) ? $siteSettings['program_unggulan'] : (!empty($siteSettings['misi']) ? $siteSettings['misi'] : 'Di kota Pontianak dan sekitarnya, terbitlah cahaya harapan dalam bentuk pembangunan dan pembinaan Rumah Tahfidz serta santunan sosial. Proyek mulia ini menjadi bukti kebersamaan dan tekad kuat masyarakat untuk memberikan pendidikan agama yang berkualitas kepada generasi penerus.') }}
+                        {{ !empty($siteSettings['program_unggulan']) ? $siteSettings['program_unggulan'] : (!empty($siteSettings['misi']) ? $siteSettings['misi'] : 'Di Kabupaten Kubu Raya dan sekitarnya, terbitlah cahaya harapan dalam bentuk pembangunan dan pembinaan Rumah Tahfidz serta santunan sosial. Proyek mulia ini menjadi bukti kebersamaan dan tekad kuat masyarakat untuk memberikan pendidikan agama yang berkualitas kepada generasi penerus.') }}
                     </p>
                 </div>
             </div>

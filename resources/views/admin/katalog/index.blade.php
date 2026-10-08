@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Katalog Program — Admin YABUN Pontianak')
+@section('title', 'Manajemen Katalog Program — Admin YABUN Cabang Kubu Raya')
 @section('breadcrumb', 'Katalog Program')
 
 @section('content')

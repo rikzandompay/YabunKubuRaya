@@ -21,7 +21,7 @@
                         Pendidikan dan budi pekerti jadi salah satu fokusnya dalam mendidik generasi islami yang berbudi luhur. Oleh karenanya, Yayasan Bakti Umat Nusantara sejak awal berdirinya telah banyak membawa manfaat dan menebarkan keberkahan bagi umat hingga kini.
                     </p>
                     <p>
-                        Yayasan kini telah membina generasi penghafal 30 Juz Al-Qur'an sesuai dengan cita-cita mulia para pendiri. Alhamdulillah berkat doa dan dukungan para donatur, Yayasan Bakti Umat Nusantara terus berkhidmat melayani sesama hingga pelosok Nusantara, termasuk di Cabang Pontianak. Wallahu a'lam bishawab.
+                        Yayasan kini telah membina generasi penghafal 30 Juz Al-Qur'an sesuai dengan cita-cita mulia para pendiri. Alhamdulillah berkat doa dan dukungan para donatur, Yayasan Bakti Umat Nusantara terus berkhidmat melayani sesama hingga pelosok Nusantara, termasuk di Cabang Kubu Raya. Wallahu a'lam bishawab.
                     </p>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Keuangan & Transparansi Donasi — {{ $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Pontianak' }}</title>
+    <title>Laporan Keuangan & Transparansi Donasi — {{ $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya' }}</title>
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-bun.webp') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,7 +105,7 @@
             </div>
             <div class="text-center flex-1">
                 <h1 class="text-lg md:text-xl font-extrabold uppercase tracking-wide text-black leading-tight">
-                    {{ $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Pontianak' }}
+                    {{ $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya' }}
                 </h1>
                 <p class="text-xs md:text-sm font-medium text-gray-700 mt-0.5">
                     Mewujudkan Kebaikan Bersama Melalui Program Sosial, Pendidikan, dan Dakwah Keumatan
@@ -262,7 +262,7 @@
         <!-- PERNYATAAN AKUNTABILITAS & PENGESAHAN -->
         <div class="mt-10 pt-4 text-xs text-gray-700">
             <div class="mb-6 p-3 bg-gray-50 border border-gray-200 rounded-lg text-[11px] leading-relaxed italic text-gray-600 print-card">
-                "Laporan ini diterbitkan secara transparan dan akuntabel oleh sistem manajemen donasi Yayasan Bakti Umat Nusantara Cabang Pontianak sebagai bentuk pertanggungjawaban amanah keumatan."
+                "Laporan ini diterbitkan secara transparan dan akuntabel oleh sistem manajemen donasi Yayasan Bakti Umat Nusantara Cabang Kubu Raya sebagai bentuk pertanggungjawaban amanah keumatan."
             </div>
 
             <div class="flex items-start justify-between gap-8 pt-4">
@@ -278,7 +278,7 @@
 
                 <div class="text-center w-52">
                     <p class="text-gray-600 mb-16">
-                        Pontianak, {{ now()->translatedFormat('d F Y') }}<br>
+                        Kubu Raya, {{ now()->translatedFormat('d F Y') }}<br>
                         <strong>Bendahara / Administrasi</strong>
                     </p>
                     <p class="border-t border-gray-400 pt-1 font-bold text-gray-900">

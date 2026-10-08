@@ -49,8 +49,8 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->ip());
         });
 
-        // Bagikan data pengaturan profil yayasan dan rekening bank aktif ke landing page & footer
-        view()->composer(['layouts.app', 'welcome', 'components.footer', 'sections.*'], function ($view) {
+        // Bagikan data pengaturan profil yayasan dan rekening bank aktif ke landing page, components & footer
+        view()->composer(['layouts.app', 'welcome', 'components.*', 'sections.*'], function ($view) {
             try {
                 $settings = Pengaturan::all()->pluck('nilai', 'kunci')->toArray();
                 $bankAccounts = RekeningBank::where('status_aktif', true)->orderBy('id')->get();

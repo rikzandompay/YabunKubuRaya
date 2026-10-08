@@ -98,6 +98,8 @@ class FinancialTransactionController extends Controller
         $categoryFilter = $request->query('kategori');
         $validCategories = ['jumat_berkah', 'donasi_bantuan', 'pembangunan_pondok_tahfidz'];
 
+        $periodFilter = $request->query('periode');
+
         $query = FinancialTransaction::whereHas('donor')
             ->with('donor')
             ->orderByDesc('transaction_date')
@@ -105,6 +107,22 @@ class FinancialTransactionController extends Controller
 
         if ($categoryFilter && in_array($categoryFilter, $validCategories, true)) {
             $query->where('category', $categoryFilter);
+        }
+
+        if ($periodFilter && $periodFilter !== 'semua') {
+            $range = match ($periodFilter) {
+                'hari_ini' => [now()->startOfDay(), now()->endOfDay()],
+                'minggu_ini' => [now()->startOfWeek(), now()->endOfWeek()],
+                'minggu_lalu' => [now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek()],
+                'bulan_ini' => [now()->startOfMonth(), now()->endOfMonth()],
+                'tahun_ini' => [now()->startOfYear(), now()->endOfYear()],
+                default => null,
+            };
+
+            if ($range) {
+                $query->whereDate('transaction_date', '>=', $range[0]->toDateString())
+                    ->whereDate('transaction_date', '<=', $range[1]->toDateString());
+            }
         }
 
         $transactions = $query->get();
@@ -117,7 +135,8 @@ class FinancialTransactionController extends Controller
             'summary',
             'settings',
             'admin',
-            'categoryFilter'
+            'categoryFilter',
+            'periodFilter'
         ));
     }
 }

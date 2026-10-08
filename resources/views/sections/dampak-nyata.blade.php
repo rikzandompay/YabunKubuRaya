@@ -40,12 +40,12 @@
 
                     <!-- Title / Label -->
                     <h3 class="text-base font-semibold mb-2 tracking-tight text-gray-900">
-                        Santri Qur'an
+                        Santri TPA/TPQ
                     </h3>
 
                     <!-- Description -->
                     <p class="text-sm text-gray-600 leading-relaxed">
-                        Para generasi penerus penghiut & penghafal Al-Qur'an 30 Juz.
+                        Para generasi penerus bangsa dalam belajar mengaji dan ilmu agama.
                     </p>
                 </div>
             </div>
@@ -81,7 +81,7 @@
 
                     <!-- Description -->
                     <p class="text-sm text-gray-600 leading-relaxed">
-                        Anak-anak yatim & piatu penerima beasiswa serta dukungan santunan bulanan.
+                        Anak-anak yatim & piatu penerima donasi serta dukungan santunan.
                     </p>
                 </div>
             </div>
@@ -105,8 +105,8 @@
 
                     <!-- Metric Counter -->
                     <span class="dampak-metric text-3xl font-extrabold text-[#111111] mb-1 tracking-tight font-sans"
-                        data-target="10">
-                        10+
+                        data-target="15">
+                        15+
                     </span>
 
                     <!-- Title / Label -->

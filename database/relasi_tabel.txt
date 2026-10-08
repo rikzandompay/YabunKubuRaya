@@ -1,6 +1,6 @@
 ================================================================================
           DOKUMENTASI RELASI ANTAR TABEL (DATABASE SCHEMA ERD)
-        WEBSITE YAYASAN BAKTI UMAT NUSANTARA (BUM) CABANG PONTIANAK
+        WEBSITE YAYASAN BAKTI UMAT NUSANTARA (BUM) CABANG KUBU RAYA
                    Berdasarkan PRD-BUM-2026-01 (v1.1)
 ================================================================================
 

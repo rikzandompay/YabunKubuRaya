@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Keuangan & Transparansi Donasi — Admin YABUN Pontianak')
+@section('title', 'Manajemen Keuangan & Transparansi Donasi — Admin YABUN Cabang Kubu Raya')
 @section('breadcrumb', 'Manajemen Keuangan')
 
 @section('content')

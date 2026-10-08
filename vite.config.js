@@ -9,13 +9,16 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
             fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                bunny('Plus Jakarta Sans', {
+                    weights: [400, 500, 600, 700, 800],
                 }),
             ],
         }),
         tailwindcss(),
     ],
+    build: {
+        target: 'es2022',
+    },
     server: {
         watch: {
             ignored: ['**/storage/framework/views/**'],

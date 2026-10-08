@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Donatur — Admin YABUN Pontianak')
+@section('title', 'Manajemen Donatur — Admin YABUN Cabang Kubu Raya')
 @section('breadcrumb', 'Donatur')
 
 @section('content')

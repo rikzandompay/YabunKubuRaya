@@ -37,8 +37,9 @@
                     <div class="flex items-center gap-6 sm:gap-8">
                         <div class="h-14 md:h-16 w-36 sm:w-44 md:w-48 shrink-0 flex items-center">
                             <img src="{{ $logo }}" alt="{{ $bank->nama_bank }}"
+                                width="160" height="48"
                                 class="h-10 sm:h-11 md:h-12 w-auto max-w-[140px] md:max-w-[160px] object-contain"
-                                onerror="this.src='{{ asset('images/logo-bun.webp') }}'" />
+                                onerror="this.src='{{ asset('images/logo-bun.webp') }}'" loading="lazy" decoding="async" />
                         </div>
                         <div>
                             <div class="flex items-center gap-2 mb-0.5">

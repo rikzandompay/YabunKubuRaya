@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Kegiatan Foto — Admin YABUN Pontianak')
+@section('title', 'Manajemen Kegiatan Foto — Admin YABUN Cabang Kubu Raya')
 @section('breadcrumb', 'Kegiatan Foto')
 
 @section('content')

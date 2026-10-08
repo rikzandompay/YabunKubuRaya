@@ -74,8 +74,18 @@ class SeoTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('<meta property="og:type" content="article">', false);
         $response->assertSee('<link rel="canonical" href="'.route('artikel.show', $article->slug).'">', false);
-        $response->assertSee('Beasiswa Santri Yabun — Yayasan BUM Pontianak', false);
+        $response->assertSee('Beasiswa Santri Yabun — Yayasan Bakti Umat Nusantara Cabang Kubu Raya', false);
         $response->assertSee('"NewsArticle"', false);
         $response->assertSee('"BreadcrumbList"', false);
+    }
+
+    public function test_robots_txt_has_valid_absolute_sitemap_and_rules(): void
+    {
+        $this->assertFileExists(public_path('robots.txt'));
+        $content = (string) file_get_contents(public_path('robots.txt'));
+
+        $this->assertStringContainsString('User-agent: *', $content);
+        $this->assertStringContainsString('Disallow: /admin', $content);
+        $this->assertStringContainsString('Sitemap: https://yabunkuburaya.org/sitemap.xml', $content);
     }
 }

@@ -584,7 +584,7 @@
     }
 </style>
 
-<!-- SECTION KATALOG PROGRAM YABUN PONTIANAK -->
+<!-- SECTION KATALOG PROGRAM YABUN CABANG KUBU RAYA -->
 <section id="katalog" class="katalog-section" aria-label="Katalog Program Yayasan Bakti Umat Nusantara">
 
     <!-- HEADER TEKS DI SEBELAH KIRI (Sesuai Permintaan User) -->
@@ -603,10 +603,11 @@
         <div class="katalog-photo-col" id="katalogPhotoContainer">
             @foreach ($katalogItems as $idx => $item)
                 <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}"
+                    width="500" height="600"
                     class="katalog-photo-img {{ $idx === 0 ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 pointer-events-none z-0' }}"
                     data-photo-id="{{ $item['id'] }}"
                     onerror="this.onerror=null; this.src='{{ $item['image_fallback'] }}';"
-                    loading="{{ $idx === 0 ? 'eager' : 'lazy' }}" />
+                    loading="{{ $idx === 0 ? 'eager' : 'lazy' }}" decoding="async" />
             @endforeach
             <div class="katalog-photo-overlay"></div>
             <div class="katalog-photo-badge">

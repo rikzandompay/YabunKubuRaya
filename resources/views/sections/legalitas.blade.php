@@ -22,8 +22,9 @@
                 <div
                     class="flex h-28 w-28 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center overflow-hidden rounded-2xl bg-white p-3.5 sm:p-4 border border-gray-200 hover:border-[#007A4D] transition-all shadow-xs hover:shadow-md">
                     <img src="{{ asset('images/logoppat.webp') }}" alt="Notaris / PPAT"
+                        width="160" height="160"
                         class="h-full w-full object-contain" onerror="this.src='{{ asset('images/logoppat.png') }}'"
-                        loading="lazy" />
+                        loading="lazy" decoding="async" />
                 </div>
                 <p class="text-[12px] sm:text-[13px] md:text-[14px] text-gray-700 max-w-[150px] sm:max-w-[180px] leading-snug font-semibold">
                     Notaris / PPAT
@@ -35,9 +36,10 @@
             <div class="col-span-1 flex flex-col items-center gap-2.5 sm:gap-3 text-center md:col-auto" data-reveal="up" data-reveal-delay="200">
                 <div
                     class="flex h-28 w-28 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center overflow-hidden rounded-2xl bg-white p-3.5 sm:p-4 border border-gray-200 hover:border-[#007A4D] transition-all shadow-xs hover:shadow-md">
-                    <img src="{{ asset('images/logo-kuburaya.png') }}" alt="Dinas Sosial Kubu Raya"
-                        class="h-full w-full object-contain" onerror="this.src='{{ asset('Logo Kuburaya.png') }}'"
-                        loading="lazy" />
+                    <img src="{{ asset('images/logo-kuburaya.webp') }}" alt="Dinas Sosial Kubu Raya"
+                        width="160" height="160"
+                        class="h-full w-full object-contain" onerror="this.src='{{ asset('images/logo-kuburaya.png') }}'"
+                        loading="lazy" decoding="async" />
                 </div>
                 <p class="text-[12px] sm:text-[13px] md:text-[14px] text-gray-700 max-w-[150px] sm:max-w-[180px] leading-snug font-semibold">
                     Dinas Sosial Kubu Raya
@@ -50,8 +52,9 @@
                 <div
                     class="flex h-28 w-28 sm:h-32 sm:w-32 md:h-40 md:w-40 items-center justify-center overflow-hidden rounded-2xl bg-white p-3.5 sm:p-4 border border-gray-200 hover:border-[#007A4D] transition-all shadow-xs hover:shadow-md">
                     <img src="{{ asset('images/logo-baznas.webp') }}" alt="BAZNAS Kabupaten Kubu Raya"
+                        width="160" height="160"
                         class="h-full w-full object-contain" onerror="this.src='{{ asset('images/logo-baznas.jpeg') }}'"
-                        loading="lazy" />
+                        loading="lazy" decoding="async" />
                 </div>
                 <p class="text-[12px] sm:text-[13px] md:text-[14px] text-gray-700 max-w-[150px] sm:max-w-[180px] leading-snug font-semibold">
                     BAZNAS Kubu Raya

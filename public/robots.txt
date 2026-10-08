@@ -3,4 +3,4 @@ Disallow: /admin/
 Disallow: /admin
 Allow: /
 
-Sitemap: /sitemap.xml
+Sitemap: https://yabunkuburaya.org/sitemap.xml

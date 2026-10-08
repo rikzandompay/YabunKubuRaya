@@ -144,6 +144,12 @@
                 depan yang lebih baik bagi sesama.
             </p>
 
+            @php
+                $waRaw = !empty($siteSettings['kontak_wa']) ? preg_replace('/[^0-9]/', '', $siteSettings['kontak_wa']) : '6281930942890';
+                if (str_starts_with($waRaw, '0')) {
+                    $waRaw = '62' . substr($waRaw, 1);
+                }
+            @endphp
             <!-- CTA Buttons -->
             <div class="flex flex-wrap items-center gap-4">
                 <a
@@ -153,7 +159,7 @@
                     Profil Yabun
                 </a>
                 <a
-                    href="https://wa.me/6281234567890?text=Assalamu%27alaikum%20YABUN%20Cabang%20Pontianak"
+                    href="https://wa.me/{{ $waRaw }}?text={{ urlencode('Assalamu\'alaikum Admin YABUN Cabang Kubu Raya') }}"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="border border-[#D6D2C8] bg-white px-8 py-3.5 text-sm font-semibold text-[#111] transition-all hover:border-[#007A4D] hover:text-[#007A4D] rounded-sm shadow-sm"

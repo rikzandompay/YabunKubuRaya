@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../views/**/*.blade.php';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -111,3 +113,153 @@ body {
         transition: none !important;
     }
 }
+
+/* ============================================================== */
+/* ADMIN PANEL DARK THEME ENGINE                                  */
+/* ============================================================== */
+html.dark .admin-theme {
+    color-scheme: dark;
+}
+
+/* Surfaces & Cards */
+html.dark .admin-theme .bg-white {
+    background-color: #1E293B;
+}
+
+html.dark .admin-theme .bg-\[\#F8FAFC\],
+html.dark .admin-theme .bg-slate-50,
+html.dark .admin-theme .bg-gray-50 {
+    background-color: #0F172A;
+}
+
+html.dark .admin-theme .bg-\[\#F1F5F9\],
+html.dark .admin-theme .bg-slate-100,
+html.dark .admin-theme .bg-gray-100 {
+    background-color: #334155;
+}
+
+/* Borders & Dividers */
+html.dark .admin-theme .border-\[\#E2E8F0\],
+html.dark .admin-theme .border-\[\#CBD5E1\],
+html.dark .admin-theme .border-\[\#E5E7EB\],
+html.dark .admin-theme .border-slate-200,
+html.dark .admin-theme .border-gray-200,
+html.dark .admin-theme .border-gray-300 {
+    border-color: #334155;
+}
+
+html.dark .admin-theme .divide-\[\#E2E8F0\],
+html.dark .admin-theme .divide-slate-200,
+html.dark .admin-theme .divide-gray-200,
+html.dark .admin-theme .divide-\[\#F1F5F9\] {
+    border-color: #334155;
+}
+
+/* Typography */
+html.dark .admin-theme .text-\[\#1E293B\],
+html.dark .admin-theme .text-slate-900,
+html.dark .admin-theme .text-slate-800,
+html.dark .admin-theme .text-gray-900,
+html.dark .admin-theme .text-gray-800 {
+    color: #F8FAFC;
+}
+
+html.dark .admin-theme .text-\[\#64748B\],
+html.dark .admin-theme .text-slate-600,
+html.dark .admin-theme .text-slate-500,
+html.dark .admin-theme .text-gray-600,
+html.dark .admin-theme .text-gray-500 {
+    color: #94A3B8;
+}
+
+html.dark .admin-theme .text-\[\#475569\],
+html.dark .admin-theme .text-slate-700,
+html.dark .admin-theme .text-gray-700 {
+    color: #CBD5E1;
+}
+
+html.dark .admin-theme .text-\[\#94A3B8\] {
+    color: #64748B;
+}
+
+/* Hover States */
+html.dark .admin-theme .hover\:bg-slate-50:hover,
+html.dark .admin-theme .hover\:bg-gray-50:hover,
+html.dark .admin-theme .hover\:bg-\[\#F8FAFC\]:hover {
+    background-color: #334155;
+}
+
+html.dark .admin-theme .hover\:bg-white:hover {
+    background-color: #334155;
+    color: #F8FAFC;
+}
+
+html.dark .admin-theme .hover\:text-\[\#1E293B\]:hover {
+    color: #FFFFFF;
+}
+
+/* Form Controls */
+html.dark .admin-theme input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="color"]),
+html.dark .admin-theme select,
+html.dark .admin-theme textarea {
+    background-color: #0F172A !important;
+    border-color: #334155 !important;
+    color: #F8FAFC !important;
+}
+
+html.dark .admin-theme input::placeholder,
+html.dark .admin-theme textarea::placeholder {
+    color: #64748B !important;
+}
+
+html.dark .admin-theme select option {
+    background-color: #0F172A;
+    color: #F8FAFC;
+}
+
+/* Alerts */
+html.dark .admin-theme .bg-emerald-50 {
+    background-color: rgba(6, 95, 70, 0.25);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #A7F3D0;
+}
+
+html.dark .admin-theme .bg-red-50 {
+    background-color: rgba(153, 27, 27, 0.25);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #FECACA;
+}
+
+html.dark .admin-theme .bg-amber-50 {
+    background-color: rgba(180, 83, 9, 0.25);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #FDE68A;
+}
+
+html.dark .admin-theme .bg-blue-50 {
+    background-color: rgba(30, 64, 175, 0.25);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #BFDBFE;
+}
+
+/* Badges */
+html.dark .admin-theme .bg-emerald-100 {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #6EE7B7;
+}
+
+html.dark .admin-theme .bg-red-100 {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #FCA5A5;
+}
+
+html.dark .admin-theme .bg-blue-100 {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #93C5FD;
+}
+
+html.dark .admin-theme .bg-amber-100 {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #FCD34D;
+}
+

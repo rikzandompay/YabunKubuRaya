@@ -6,35 +6,37 @@
         <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-3 md:gap-4 max-w-3xl">
             <!-- Logo 1: BUN -->
             <a href="{{ url('/') }}"
+                aria-label="Beranda Yayasan Bakti Umat Nusantara"
                 class="flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3 hover:opacity-95 transition-opacity">
-                <img src="{{ asset('images/logo-bun.webp') }}" alt="Logo Yayasan Bakti Umat Nusantara" width="200"
-                    height="50" class="h-8 md:h-10 w-auto max-w-full object-contain"
-                    onerror="this.src='{{ asset('images/logo-bun.jpeg') }}'" />
+                <img src="{{ asset('images/logo-bun.webp') }}" alt="Logo Yayasan Bakti Umat Nusantara" width="140"
+                    height="40" class="h-8 md:h-10 w-auto max-w-full object-contain"
+                    onerror="this.src='{{ asset('images/logo-bun.jpeg') }}'" loading="lazy" decoding="async" />
             </a>
             <!-- Logo 2: YABUN -->
             <a href="{{ url('/') }}"
+                aria-label="Beranda YABUN Cabang Kubu Raya"
                 class="flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3 hover:opacity-95 transition-opacity">
-                <img src="{{ asset('images/logoyabun.webp') }}" alt="Logo YABUN" width="200" height="50"
+                <img src="{{ asset('images/logoyabun.webp') }}" alt="Logo YABUN" width="140" height="40"
                     class="h-8 md:h-10 w-auto max-w-full object-contain"
-                    onerror="this.src='{{ asset('images/logoyabun.jpeg') }}'" />
+                    onerror="this.src='{{ asset('images/logoyabun.jpeg') }}'" loading="lazy" decoding="async" />
             </a>
             <!-- Logo 3: BAZNAS -->
             <div class="flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3">
-                <img src="{{ asset('images/logo-baznas.webp') }}" alt="Logo BAZNAS" width="200" height="50"
+                <img src="{{ asset('images/logo-baznas.webp') }}" alt="Logo BAZNAS" width="140" height="40"
                     class="h-8 md:h-10 w-auto max-w-full object-contain"
-                    onerror="this.src='{{ asset('images/logo-baznas.jpeg') }}'" />
+                    onerror="this.src='{{ asset('images/logo-baznas.jpeg') }}'" loading="lazy" decoding="async" />
             </div>
             <!-- Logo 4: Notaris / PPAT -->
             <div class="flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3">
-                <img src="{{ asset('images/logoppat.webp') }}" alt="Logo Notaris PPAT" width="200"
-                    height="50" class="h-8 md:h-10 w-auto max-w-full object-contain"
-                    onerror="this.src='{{ asset('images/logoppat.png') }}'" />
+                <img src="{{ asset('images/logoppat.webp') }}" alt="Logo Notaris PPAT" width="140"
+                    height="40" class="h-8 md:h-10 w-auto max-w-full object-contain"
+                    onerror="this.src='{{ asset('images/logoppat.png') }}'" loading="lazy" decoding="async" />
             </div>
             <!-- Logo 5: Kabupaten Kubu Raya -->
             <div class="col-span-2 sm:col-auto flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3">
-                <img src="{{ asset('images/logo-kuburaya.webp') }}" alt="Logo Kabupaten Kubu Raya" width="200"
-                    height="50" class="h-8 md:h-10 w-auto max-w-full object-contain"
-                    onerror="this.src='{{ asset('images/logo-kuburaya.png') }}'" />
+                <img src="{{ asset('images/logo-kuburaya.webp') }}" alt="Logo Kabupaten Kubu Raya" width="140"
+                    height="40" class="h-8 md:h-10 w-auto max-w-full object-contain"
+                    onerror="this.src='{{ asset('images/logo-kuburaya.png') }}'" loading="lazy" decoding="async" />
             </div>
         </div>
     </div>
@@ -61,7 +63,7 @@
                         src="https://maps.google.com/maps?q=Yayasan+Bakti+Umat+Nusantara+Pontianak&t=&z=16&ie=UTF8&iwloc=&output=embed"
                         width="100%" height="100%" style="border: 0; position: absolute; inset: 0;"
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                        title="Lokasi Yayasan Bakti Umat Nusantara Pontianak"></iframe>
+                        title="Lokasi Yayasan Bakti Umat Nusantara Cabang Kubu Raya"></iframe>
                 </div>
                 <div class="text-xs text-white/70 space-y-1">
                     <p class="font-semibold text-white text-[11px] uppercase tracking-wide">Alamat Kantor:</p>
@@ -101,7 +103,7 @@
                             Donasi</a>
                     </li>
                     <li>
-                        <a href="{{ url('/#transparansi') }}"
+                        <a href="{{ request()->is('/') ? '#transparansi-donasi' : url('/#transparansi-donasi') }}"
                             class="hover:text-emerald-400 transition-colors">Transparansi Donasi</a>
                     </li>
                     <li>
@@ -196,7 +198,7 @@
                 <div class="space-y-3 text-sm text-white/80">
                     <div>
                         <p class="text-[11px] text-white/50 mb-0.5">Telepon / WhatsApp</p>
-                        <a href="https://wa.me/{{ $waRaw }}?text={{ urlencode('Assalamu\'alaikum Admin YABUN Pontianak') }}"
+                        <a href="https://wa.me/{{ $waRaw }}?text={{ urlencode('Assalamu\'alaikum Admin YABUN Cabang Kubu Raya') }}"
                             target="_blank" rel="noopener noreferrer"
                             class="font-semibold text-white hover:text-emerald-400 transition-colors inline-flex items-center gap-1.5">
                             {{ !empty($siteSettings['kontak_wa']) ? $siteSettings['kontak_wa'] : '+62 819-3094-2890' }}
@@ -257,7 +259,7 @@
     <!-- ===== Bottom Bar ===== -->
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12 py-5">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-[11px] text-white/50">
-            <p>© {{ date('Y') }} Yayasan Bakti Umat Nusantara Cabang Pontianak. All rights reserved.</p>
+            <p>© {{ date('Y') }} Yayasan Bakti Umat Nusantara Cabang Kubu Raya. All rights reserved.</p>
             <div class="flex gap-5">
                 <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
                 <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>

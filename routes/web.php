@@ -28,6 +28,7 @@ Route::redirect('/admin', '/admin/dashboard');
 // SECURITY: Semua route admin wajib login (auth) + role admin/superadmin
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/export', [DashboardController::class, 'export'])->name('dashboard.export');
 
     // FR-ADM-03 Manajemen Kegiatan Foto
     Route::get('/galeri', [AdminGalleryController::class, 'index'])->name('galeri.index');

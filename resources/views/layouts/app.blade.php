@@ -2,51 +2,55 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Yayasan Bakti Umat Nusantara Cabang Pontianak — Bersama Membangun Kebaikan')</title>
-    <meta name="description" content="@yield('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Pontianak. Mewujudkan kebaikan melalui program sosial, pendidikan, dan keagamaan.')">
+    <title>@yield('title', 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya — Bersama Membangun Kebaikan')</title>
+    <meta name="description" content="@yield('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Kubu Raya. Mewujudkan kebaikan melalui program sosial, pendidikan, dan keagamaan.')">
     <link rel="canonical" href="@yield('canonical_url', url()->current())">
     <meta name="robots" content="@yield('meta_robots', 'index, follow')">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:site_name" content="Yayasan Bakti Umat Nusantara Cabang Pontianak">
+    <meta property="og:site_name" content="Yayasan Bakti Umat Nusantara Cabang Kubu Raya">
     <meta property="og:locale" content="id_ID">
     <meta property="og:url" content="@yield('canonical_url', url()->current())">
-    <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'Yayasan Bakti Umat Nusantara Cabang Pontianak — Bersama Membangun Kebaikan'))">
-    <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Pontianak. Mewujudkan kebaikan melalui program sosial, pendidikan, dan keagamaan.'))">
+    <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya — Bersama Membangun Kebaikan'))">
+    <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Kubu Raya. Mewujudkan kebaikan melalui program sosial, pendidikan, dan keagamaan.'))">
     <meta property="og:image" content="@yield('og_image', asset('images/logo-bun.webp'))">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="@yield('twitter_card', 'summary_large_image')">
     <meta name="twitter:url" content="@yield('canonical_url', url()->current())">
-    <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', 'Yayasan Bakti Umat Nusantara Cabang Pontianak — Bersama Membangun Kebaikan'))">
-    <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Pontianak. Mewujudkan kebaikan melalui program sosial, pendidikan, dan keagamaan.'))">
+    <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya — Bersama Membangun Kebaikan'))">
+    <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Kubu Raya. Mewujudkan kebaikan melalui program sosial, pendidikan, dan keagamaan.'))">
     <meta name="twitter:image" content="@yield('og_image', asset('images/logo-bun.webp'))">
 
     <!-- Favicon -->
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-bun.webp') }}">
 
-    <!-- Google Fonts: Plus Jakarta Sans -->
+    <!-- Google Fonts: Plus Jakarta Sans (Non-blocking with print-swap fallback) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    </noscript>
 
     <!-- Structured Data (JSON-LD Organization) -->
     <script type="application/ld+json">
     {!! json_encode([
         '@'.'context' => 'https://schema.org',
         '@'.'type' => 'NGO',
-        'name' => 'Yayasan Bakti Umat Nusantara Cabang Pontianak',
-        'alternateName' => ['YABUN Pontianak', 'Bakti Umat Nusantara Pontianak'],
+        'name' => 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya',
+        'alternateName' => ['YABUN Kubu Raya', 'Bakti Umat Nusantara Kubu Raya'],
         'url' => url('/'),
         'logo' => asset('images/logo-bun.webp'),
-        'description' => 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Pontianak. Mewujudkan kebaikan melalui program sosial, pendidikan, dan keagamaan.',
+        'description' => 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Kubu Raya. Mewujudkan kebaikan melalui program sosial, pendidikan, dan keagamaan.',
         'address' => [
             '@'.'type' => 'PostalAddress',
-            'addressLocality' => 'Pontianak',
+            'addressLocality' => 'Kubu Raya',
             'addressRegion' => 'Kalimantan Barat',
             'addressCountry' => 'ID',
         ],

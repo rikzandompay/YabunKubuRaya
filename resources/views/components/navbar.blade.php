@@ -9,8 +9,9 @@
     <nav class="mx-auto flex max-w-[1400px] items-center justify-between px-6 lg:px-12 h-[68px]">
         <!-- Brand Logo -->
         <div class="flex items-center">
-            <a href="{{ url('/') }}" class="inline-flex items-center gap-3 py-1">
+            <a href="{{ url('/') }}" class="inline-flex items-center gap-3 py-1" aria-label="Beranda Yayasan Bakti Umat Nusantara">
                 <img src="{{ asset('images/logo-bun.webp') }}" alt="Logo Yayasan Bakti Umat Nusantara"
+                    width="168" height="44"
                     class="h-10 md:h-11 w-auto object-contain" onerror="this.src='{{ asset('images/logo-bun.jpeg') }}'" />
             </a>
         </div>
@@ -61,9 +62,16 @@
             </li>
         </ul>
 
+        @php
+            $waRaw = !empty($siteSettings['kontak_wa']) ? preg_replace('/[^0-9]/', '', $siteSettings['kontak_wa']) : '6281930942890';
+            if (str_starts_with($waRaw, '0')) {
+                $waRaw = '62' . substr($waRaw, 1);
+            }
+        @endphp
+
         <!-- Right Action CTA -->
         <div class="hidden md:flex items-center gap-3">
-            <a href="https://wa.me/6285349836076?text=Assalamu%27alaikum%20Admin%20YABUN%20Pontianak"
+            <a href="https://wa.me/{{ $waRaw }}?text={{ urlencode('Assalamu\'alaikum Admin YABUN Cabang Kubu Raya') }}"
                 target="_blank" rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 bg-[#00843D] hover:bg-[#006B31] text-white px-5 py-2.5 rounded-md text-[13px] font-semibold transition-all shadow-sm hover:shadow-md active:scale-95">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -174,7 +182,7 @@
                     </svg>
                     <span>Donasi Sekarang</span>
                 </a>
-                <a href="https://wa.me/6285349836076?text=Assalamu%27alaikum%20Admin%20YABUN%20Pontianak"
+                <a href="https://wa.me/{{ $waRaw }}?text={{ urlencode('Assalamu\'alaikum Admin YABUN Cabang Kubu Raya') }}"
                     target="_blank" rel="noopener noreferrer"
                     class="flex w-full items-center justify-center gap-2 border border-gray-200 bg-gray-50 text-gray-800 py-3.5 rounded-xl font-bold text-sm hover:border-[#00843D] hover:text-[#00843D] active:scale-98 transition-all">
                     <svg class="w-4 h-4 text-[#00843D]" fill="currentColor" viewBox="0 0 24 24">

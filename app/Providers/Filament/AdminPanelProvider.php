@@ -28,6 +28,10 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->homeUrl('/admin/dashboard')
+            ->brandName('YABUN Cabang Kubu Raya')
+            ->brandLogo(fn () => asset('images/logo-bun.webp'))
+            ->brandLogoHeight('2.75rem')
+            ->favicon(asset('images/favicon-yabun.png'))
             ->login()
             ->colors([
                 'primary' => Color::Emerald,

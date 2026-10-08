@@ -36,7 +36,8 @@
 @endphp
 
 <!-- SECTION TRANSPARANSI DONASI (SESUAI PRD & REFERENSI TIPOGRAFI ANGKA BESAR) -->
-<section id="transparansi-donasi" class="bg-white py-16 lg:py-24 border-t border-[#E5E7EB]" aria-labelledby="transparansi-heading">
+<section id="transparansi-donasi" class="bg-white py-16 lg:py-24 border-t border-[#E5E7EB] scroll-mt-20 relative" aria-labelledby="transparansi-heading">
+    <div id="transparansi" class="absolute -top-20"></div>
     <div class="max-w-7xl mx-auto px-6">
 
         <!-- Header Section Rata Kiri -->

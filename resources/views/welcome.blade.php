@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Yayasan Bakti Umat Nusantara Cabang Pontianak — Bersama Membangun Kebaikan')
-@section('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Pontianak. Menghadirkan program sosial, santunan dhuafa, pendidikan tahfidz Al-Qur\'an, dan keagamaan.')
+@section('title', 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya — Bersama Membangun Kebaikan')
+@section('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Kubu Raya. Menghadirkan program sosial, santunan dhuafa, pendidikan tahfidz Al-Qur\'an, dan keagamaan.')
 @section('canonical_url', route('home'))
 
 @section('content')
-    {{-- Hero Section (Vector Pattern, Clean Typography, CTA) --}}
-    <div data-reveal data-reveal-duration="800">
+    {{-- Hero Section (Above the fold - Rendered immediately for optimal LCP & FCP) --}}
+    <div>
         @include('sections.hero')
     </div>
 
