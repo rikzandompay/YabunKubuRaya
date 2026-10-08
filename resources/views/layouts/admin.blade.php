@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'Dashboard — Admin Bakti Umat Nusantara Cabang Kubu Raya')</title>
+    <meta name="robots" content="noindex, nofollow">
 
     <link rel="icon" type="image/webp" href="{{ asset('images/logo-bun.webp') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
