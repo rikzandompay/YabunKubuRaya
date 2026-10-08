@@ -19,6 +19,12 @@ Route::get('/galeri', [GalleryController::class, 'index'])->name('galeri.index')
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');
 
+Route::get('/googlecc04ffb1e40ce9fe.html', function () {
+    return response("google-site-verification: googlecc04ffb1e40ce9fe.html\n", 200, [
+        'Content-Type' => 'text/html; charset=utf-8',
+    ]);
+});
+
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 Route::get('/robots.txt', function () {
