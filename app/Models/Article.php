@@ -27,6 +27,32 @@ class Article extends Model
         'is_published' => 'boolean',
     ];
 
+    protected static function booted(): void
+    {
+        static::saved(function () {
+            self::generateStaticSitemap();
+        });
+
+        static::deleted(function () {
+            self::generateStaticSitemap();
+        });
+    }
+
+    public static function generateStaticSitemap(): void
+    {
+        try {
+            $articles = self::published()
+                ->select('id', 'slug', 'updated_at', 'published_at')
+                ->orderByDesc('published_at')
+                ->get();
+
+            $content = view('sitemap', compact('articles'))->render();
+            file_put_contents(public_path('sitemap.xml'), $content);
+        } catch (\Throwable) {
+            // Ignore if in migration or cli environment without database
+        }
+    }
+
     public function programCategory(): BelongsTo
     {
         return $this->belongsTo(ProgramCategory::class);
