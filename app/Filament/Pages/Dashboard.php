@@ -8,7 +8,6 @@ class Dashboard extends BaseDashboard
 {
     public function mount(): void
     {
-        redirect()->to('/admin/dashboard')->send();
-        exit;
+        $this->redirect('/admin/dashboard');
     }
 }
