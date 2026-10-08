@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -78,6 +80,14 @@ class User extends Authenticatable
     public function setPasswordAttribute(?string $value): void
     {
         $this->attributes['kata_sandi'] = $value;
+    }
+
+    /**
+     * Determine whether the user can access the Filament admin panel.
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return in_array($this->peran, ['admin', 'superadmin'], true);
     }
 
     /**
