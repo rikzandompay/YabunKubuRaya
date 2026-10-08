@@ -21,6 +21,16 @@ Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
+Route::get('/robots.txt', function () {
+    $sitemapUrl = url('/sitemap.xml');
+    $content = "User-agent: *\nDisallow: /admin/\nDisallow: /admin\nAllow: /\n\nSitemap: {$sitemapUrl}\n";
+
+    return response($content, 200, [
+        'Content-Type' => 'text/plain; charset=utf-8',
+        'Cache-Control' => 'no-cache, no-store, must-revalidate',
+    ]);
+});
+
 Route::redirect('/login', '/admin/login')->name('login');
 Route::redirect('/admin', '/admin/dashboard');
 
