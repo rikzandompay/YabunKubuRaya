@@ -10,7 +10,10 @@
     <title>@yield('title', 'Dashboard — Admin Bakti Umat Nusantara Cabang Kubu Raya')</title>
     <meta name="robots" content="noindex, nofollow">
 
-    <link rel="icon" type="image/webp" href="{{ asset('images/logo-bun.webp') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('favicon-48x48.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link

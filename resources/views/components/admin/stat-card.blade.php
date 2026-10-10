@@ -29,10 +29,10 @@
     </div>
 
     {{-- Inner card --}}
-    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-1.5 my-1.5 sm:mx-3 sm:my-3 p-2.5 sm:p-4 border border-transparent dark:border-slate-800/80 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-1.5 my-1.5 sm:mx-2.5 sm:my-2.5 p-2.5 sm:p-3.5 border border-transparent dark:border-slate-800/80 transition-colors duration-200">
         {{-- Mobile layout (< sm): Value on top, Delta + Sparkline side-by-side below --}}
         <div class="block sm:hidden">
-            <p class="text-sm xs:text-base font-bold text-[#1E293B] dark:text-white tracking-tight truncate" title="{{ format_rupiah($value) }}">
+            <p class="text-sm xs:text-base font-bold text-[#1E293B] dark:text-white tracking-tight whitespace-nowrap" title="{{ format_rupiah($value) }}">
                 {{ format_rupiah($value) }}
             </p>
             <div class="mt-1 flex items-center justify-between gap-1">
@@ -51,13 +51,13 @@
             </div>
         </div>
 
-        {{-- Desktop / Tablet layout (>= sm): Value + Delta on left, Sparkline on right --}}
-        <div class="hidden sm:flex sm:items-end sm:justify-between sm:gap-3">
-            <div class="min-w-0">
-                <p class="text-2xl font-bold text-[#1E293B] dark:text-white tracking-tight truncate" title="{{ format_rupiah($value) }}">
-                    {{ format_rupiah($value) }}
-                </p>
-                <p class="mt-1 text-xs flex items-center gap-1.5">
+        {{-- Desktop / Tablet layout (>= sm): Full width value on top, Delta + Sparkline below --}}
+        <div class="hidden sm:block">
+            <p class="text-base lg:text-xl xl:text-2xl font-bold text-[#1E293B] dark:text-white tracking-tight whitespace-nowrap" title="{{ format_rupiah($value) }}">
+                {{ format_rupiah($value) }}
+            </p>
+            <div class="mt-1 sm:mt-2 hidden sm:flex sm:items-center sm:justify-between sm:gap-2">
+                <p class="text-xs flex items-center gap-1.5 font-medium truncate">
                     @if($isNeutral || $delta == 0)
                         <span class="text-[#64748B] dark:text-slate-400 font-medium">0%</span>
                     @else
@@ -65,13 +65,11 @@
                             {{ $positive ? '↑ +' : '↓ -' }}{{ $delta }}%
                         </span>
                     @endif
-                    <span class="text-[#94A3B8] dark:text-slate-500 truncate">{{ $comparison }}</span>
+                    <span class="text-[#94A3B8] dark:text-slate-500 font-normal truncate">{{ $comparison }}</span>
                 </p>
-            </div>
-
-            {{-- Sparkline SVG --}}
-            <div class="shrink-0">
-                <x-admin.sparkline :path="$sparkline" :area-path="$sparklineArea" :positive="$positive" :is-neutral="$isNeutral" class="w-20 h-8 shrink-0" />
+                <div class="shrink-0">
+                    <x-admin.sparkline :path="$sparkline" :area-path="$sparklineArea" :positive="$positive" :is-neutral="$isNeutral" class="w-16 h-6 xl:w-20 xl:h-7 shrink-0" />
+                </div>
             </div>
         </div>
     </div>

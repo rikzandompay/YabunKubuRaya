@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya — Bersama Membangun Kebaikan')
-@section('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Kubu Raya. Menghadirkan program sosial, santunan dhuafa, pendidikan tahfidz Al-Qur\'an, dan keagamaan.')
+@section('title', 'Yayasan Bakti Umat Nusantara (YABUN) Kubu Raya & Pontianak — Lembaga Sosial & Yatim Dhuafa')
+@section('meta_description', 'Website Resmi Yayasan Bakti Umat Nusantara (YABUN) Cabang Kubu Raya & Pontianak, Kalimantan Barat. Menghadirkan program sosial, santunan yatim dhuafa, dan pendidikan tahfidz Al-Qur\'an di Kubu Raya dan Pontianak.')
 @section('canonical_url', route('home'))
 
 @section('content')
