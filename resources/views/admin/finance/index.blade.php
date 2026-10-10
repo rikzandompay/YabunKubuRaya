@@ -23,12 +23,12 @@
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-3">
-                <a href="{{ route('admin.keuangan.pdf', request()->query()) }}" target="_blank"
+                <a href="{{ route('admin.keuangan.pdf', request()->query()) }}"
                     class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-[#00843D] text-white hover:bg-[#006B31] transition-colors shadow-sm">
                     <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <span>Cetak Laporan PDF</span>
+                    <span>Unduh Laporan PDF</span>
                 </a>
                 <a href="{{ route('home') }}#transparansi-donasi"
                     class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors shadow-sm">

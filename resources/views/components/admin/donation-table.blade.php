@@ -103,7 +103,7 @@
                     <svg class="w-4 h-4 text-[#94A3B8] dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/></svg>
                 </button>
                 <div x-show="kebabOpen" x-transition class="absolute right-0 mt-1 w-40 bg-white dark:bg-[#1E293B] border border-[#E2E8F0] dark:border-slate-700 rounded-lg shadow-xl py-1 z-20" role="menu" x-cloak>
-                    <a href="{{ route('admin.keuangan.pdf') }}" target="_blank" class="block w-full text-left px-3 py-1.5 text-sm text-[#475569] dark:text-slate-200 hover:bg-[#F1F5F9] dark:hover:bg-slate-800" role="menuitem">Cetak Laporan</a>
+                    <a href="{{ route('admin.keuangan.pdf') }}" class="block w-full text-left px-3 py-1.5 text-sm text-[#475569] dark:text-slate-200 hover:bg-[#F1F5F9] dark:hover:bg-slate-800" role="menuitem">Unduh Laporan PDF</a>
                     <a href="{{ route('admin.dashboard.export') }}" class="block w-full text-left px-3 py-1.5 text-sm text-[#475569] dark:text-slate-200 hover:bg-[#F1F5F9] dark:hover:bg-slate-800" role="menuitem">Ekspor Data (CSV)</a>
                 </div>
             </div>

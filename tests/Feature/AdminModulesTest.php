@@ -264,17 +264,15 @@ class AdminModulesTest extends TestCase
 
         $response = $this->actingAs($this->admin)->get(route('admin.keuangan.pdf'));
         $response->assertStatus(200);
-        $response->assertSee('Laporan Transparansi Keuangan');
-        $response->assertSee('Donatur Test PDF');
-        $response->assertSee('500.000');
-        $response->assertDontSee('Tersinkronisasi DB');
+        $response->assertHeader('content-type', 'application/pdf');
+        $this->assertStringContainsString('attachment; filename=', $response->headers->get('content-disposition') ?? '');
+        $this->assertStringStartsWith('%PDF-', $response->getContent());
 
-        // Test with category filter: only active category should appear in summary cards
+        // Test with category filter
         $filteredResponse = $this->actingAs($this->admin)->get(route('admin.keuangan.pdf', ['kategori' => 'jumat_berkah']));
         $filteredResponse->assertStatus(200);
-        $filteredResponse->assertSee('JUMAT BERKAH');
-        $filteredResponse->assertDontSee('DONASI BANTUAN');
-        $filteredResponse->assertDontSee('Tersinkronisasi DB');
+        $filteredResponse->assertHeader('content-type', 'application/pdf');
+        $this->assertStringContainsString('laporan-keuangan-yabun-kubu-raya-jumat_berkah-', $filteredResponse->headers->get('content-disposition') ?? '');
     }
 
     public function test_deleting_donor_deletes_its_financial_transactions(): void

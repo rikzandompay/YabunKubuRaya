@@ -7,9 +7,11 @@ use App\Models\Donatur;
 use App\Models\FinancialTransaction;
 use App\Models\Pengaturan;
 use App\Services\FinanceSummaryService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class FinancialTransactionController extends Controller
 {
@@ -91,9 +93,9 @@ class FinancialTransactionController extends Controller
     }
 
     /**
-     * Cetak atau unduh laporan transparansi keuangan ke format PDF.
+     * Unduh langsung laporan transparansi keuangan ke format PDF.
      */
-    public function exportPdf(Request $request): View
+    public function exportPdf(Request $request): Response
     {
         $categoryFilter = $request->query('kategori');
         $validCategories = ['jumat_berkah', 'donasi_bantuan', 'pembangunan_pondok_tahfidz'];
@@ -130,13 +132,26 @@ class FinancialTransactionController extends Controller
         $settings = Pengaturan::all()->pluck('nilai', 'kunci')->toArray();
         $admin = auth()->user();
 
-        return view('admin.finance.pdf', compact(
+        $logoLeft = file_exists(public_path('images/logo-bun.jpeg'))
+            ? 'data:image/jpeg;base64,'.base64_encode(file_get_contents(public_path('images/logo-bun.jpeg')))
+            : null;
+        $logoRight = file_exists(public_path('images/logo-yabun.png'))
+            ? 'data:image/png;base64,'.base64_encode(file_get_contents(public_path('images/logo-yabun.png')))
+            : null;
+
+        $pdf = Pdf::loadView('admin.finance.pdf', compact(
             'transactions',
             'summary',
             'settings',
             'admin',
             'categoryFilter',
-            'periodFilter'
-        ));
+            'periodFilter',
+            'logoLeft',
+            'logoRight'
+        ))->setPaper('a4', 'portrait');
+
+        $filename = 'laporan-keuangan-yabun-kubu-raya-'.($categoryFilter ?: 'semua').'-'.now()->format('Ymd_His').'.pdf';
+
+        return $pdf->download($filename);
     }
 }

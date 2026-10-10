@@ -2,144 +2,296 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Keuangan & Transparansi Donasi — {{ $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya' }}</title>
-    <link rel="icon" type="image/webp" href="{{ asset('images/logo-bun.webp') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css'])
     <style>
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-            body {
-                background: white !important;
-                color: #000 !important;
-                font-size: 11pt;
-            }
-            .page-break {
-                page-break-after: always;
-            }
-            .print-table th {
-                background-color: #f1f5f9 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .print-card {
-                border: 1px solid #cbd5e1 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-        }
         @page {
+            margin: 15mm 12mm 15mm 12mm;
             size: A4 portrait;
-            margin: 12mm 15mm;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #1E293B;
+            font-size: 9.5pt;
+            line-height: 1.35;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+        }
+        /* KOP SURAT */
+        .kop-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2px;
+        }
+        .kop-table td {
+            vertical-align: middle;
+            padding: 0;
+        }
+        .kop-logo-left {
+            width: 80px;
+            text-align: left;
+        }
+        .kop-logo-right {
+            width: 80px;
+            text-align: right;
+        }
+        .kop-logo-left img, .kop-logo-right img {
+            max-height: 58px;
+            max-width: 75px;
+        }
+        .kop-text {
+            text-align: center;
+            padding: 0 10px;
+        }
+        .kop-title {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #0F172A;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        .kop-subtitle {
+            font-size: 8.5pt;
+            color: #334155;
+            margin: 2px 0 0 0;
+        }
+        .kop-address {
+            font-size: 7.5pt;
+            color: #475569;
+            margin: 3px 0 0 0;
+            line-height: 1.25;
+        }
+        .kop-contact {
+            font-size: 7.5pt;
+            color: #475569;
+            margin: 2px 0 0 0;
+        }
+        .border-kop-thick {
+            border-bottom: 2.5px solid #0F172A;
+            margin-top: 6px;
+        }
+        .border-kop-thin {
+            border-bottom: 0.75px solid #0F172A;
+            margin-top: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        /* JUDUL LAPORAN */
+        .report-title-section {
+            text-align: center;
+            margin-bottom: 14px;
+        }
+        .report-title {
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: underline;
+            margin: 0;
+            color: #0F172A;
+        }
+        .report-subtitle {
+            font-size: 8pt;
+            color: #64748B;
+            margin: 3px 0 0 0;
+        }
+
+        /* METADATA INFO */
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 14px;
+            background-color: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            border-radius: 4px;
+        }
+        .meta-table td {
+            padding: 6px 10px;
+            font-size: 8pt;
+            border: 1px solid #E2E8F0;
+        }
+        .meta-label {
+            color: #64748B;
+            display: block;
+            font-size: 7.5pt;
+        }
+        .meta-val {
+            font-weight: bold;
+            color: #0F172A;
+        }
+
+        /* SECTION HEADER */
+        .section-heading {
+            font-size: 8.5pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #0F172A;
+            margin: 0 0 6px 0;
+            letter-spacing: 0.3px;
+        }
+
+        /* RINGKASAN PROGRAM */
+        .summary-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 6px;
+            margin: 0 -6px 10px -6px;
+        }
+        .summary-cell {
+            padding: 8px 10px;
+            border: 1px solid #CBD5E1;
+            background-color: #F8FAFC;
+            vertical-align: top;
+        }
+        .summary-cell-title {
+            font-size: 7.5pt;
+            font-weight: bold;
+            color: #475569;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .summary-cell-amount {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #007A4D;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .summary-total-banner {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #F1F5F9;
+            border: 1.5px solid #94A3B8;
+            margin-bottom: 14px;
+        }
+        .summary-total-banner td {
+            padding: 7px 12px;
+            font-weight: bold;
+        }
+
+        /* DATA TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+        .data-table th {
+            background-color: #F1F5F9;
+            color: #0F172A;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 7.5pt;
+            padding: 6px 8px;
+            border: 1px solid #CBD5E1;
+            text-align: left;
+        }
+        .data-table td {
+            padding: 5px 8px;
+            font-size: 8pt;
+            border: 1px solid #E2E8F0;
+            vertical-align: middle;
+        }
+        .data-table tr.even {
+            background-color: #F8FAFC;
+        }
+        .data-table tfoot td {
+            background-color: #F1F5F9;
+            border-top: 2px solid #0F172A;
+            font-weight: bold;
+            padding: 7px 8px;
+        }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-mono { font-family: 'Courier New', Courier, monospace; }
+        .badge-type {
+            display: inline-block;
+            padding: 1px 4px;
+            font-size: 6.5pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid #94A3B8;
+            background: #FFFFFF;
+            border-radius: 2px;
+        }
+
+        /* AKUNTABILITAS & TANDA TANGAN */
+        .disclaimer-box {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 6px 10px;
+            font-size: 7.5pt;
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .signature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            page-break-inside: avoid;
+        }
+        .signature-table td {
+            width: 50%;
+            text-align: center;
+            vertical-align: top;
+            font-size: 8pt;
+            padding: 0 20px;
+        }
+        .signature-space {
+            height: 55px;
+        }
+        .signature-line {
+            border-bottom: 1px solid #475569;
+            margin: 0 25px;
+            padding-bottom: 2px;
+            font-weight: bold;
+            color: #0F172A;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans antialiased min-h-screen">
+<body>
 
-    <!-- Top Action Bar (Hanya tampil di layar, tersembunyi saat dicetak) -->
-    <div class="no-print sticky top-0 z-50 bg-[#0B192C] text-white py-3.5 px-6 shadow-md">
-        <div class="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-600/30 text-emerald-400">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                </span>
-                <div>
-                    <h2 class="text-sm font-bold">Pratinjau Dokumen Laporan Keuangan (PDF)</h2>
-                    <p class="text-xs text-gray-300">Format siap cetak A4. Pilih "Save as PDF" di menu cetak browser untuk menyimpan file PDF.</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <button type="button" onclick="window.print()"
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-[#00843D] hover:bg-[#006B31] text-white text-xs sm:text-sm font-semibold rounded-lg shadow-sm transition-all cursor-pointer">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                    </svg>
-                    <span>Cetak / Simpan PDF</span>
-                </button>
-                <a href="{{ route('admin.keuangan.index') }}"
-                    class="inline-flex items-center gap-2 px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-medium rounded-lg transition-colors">
-                    <span>Tutup & Kembali</span>
-                </a>
-            </div>
-        </div>
+    <!-- KOP SURAT YAYASAN -->
+    <table class="kop-table">
+        <tr>
+            <td class="kop-logo-left">
+                @if(!empty($logoLeft))
+                    <img src="{{ $logoLeft }}" alt="Logo Yayasan">
+                @endif
+            </td>
+            <td class="kop-text">
+                <div class="kop-title">{{ $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya' }}</div>
+                <div class="kop-subtitle">Mewujudkan Kebaikan Bersama Melalui Program Sosial, Pendidikan, dan Dakwah Keumatan</div>
+                <div class="kop-address">{{ $settings['alamat'] ?? 'Komplek Pondok Indah Lestari, Jln. Harmoni III Blok H4 No.2, Kec. Sungai Raya, Kab. Kubu Raya, Kalimantan Barat' }}</div>
+                <div class="kop-contact">WhatsApp: <strong>{{ $settings['kontak_wa'] ?? '+62 819-3094-2890' }}</strong> &nbsp;|&nbsp; Email: <strong>{{ $settings['email'] ?? 'ybaktiumat@gmail.com' }}</strong></div>
+            </td>
+            <td class="kop-logo-right">
+                @if(!empty($logoRight))
+                    <img src="{{ $logoRight }}" alt="Logo YABUN">
+                @endif
+            </td>
+        </tr>
+    </table>
+    <div class="border-kop-thick"></div>
+    <div class="border-kop-thin"></div>
 
-        <!-- Filter Bar Terintegrasi Langsung di Header Pratinjau PDF -->
-        <div class="max-w-4xl mx-auto mt-2.5 pt-2.5 border-t border-white/10 flex flex-wrap items-center gap-2 text-xs">
-            <span class="text-white/70 font-medium">Filter Kategori Laporan:</span>
-            <div class="flex flex-wrap items-center gap-1.5">
-                <a href="{{ route('admin.keuangan.pdf') }}"
-                    class="px-2.5 py-1 rounded-md transition-colors {{ empty($categoryFilter) ? 'bg-white text-gray-900 font-bold shadow-xs' : 'bg-white/10 text-gray-200 hover:bg-white/20' }}">
-                    Semua Program
-                </a>
-                <a href="{{ route('admin.keuangan.pdf', ['kategori' => 'jumat_berkah']) }}"
-                    class="px-2.5 py-1 rounded-md transition-colors {{ $categoryFilter === 'jumat_berkah' ? 'bg-white text-gray-900 font-bold shadow-xs' : 'bg-white/10 text-gray-200 hover:bg-white/20' }}">
-                    Jumat Berkah
-                </a>
-                <a href="{{ route('admin.keuangan.pdf', ['kategori' => 'donasi_bantuan']) }}"
-                    class="px-2.5 py-1 rounded-md transition-colors {{ $categoryFilter === 'donasi_bantuan' ? 'bg-white text-gray-900 font-bold shadow-xs' : 'bg-white/10 text-gray-200 hover:bg-white/20' }}">
-                    Donasi Bantuan
-                </a>
-                <a href="{{ route('admin.keuangan.pdf', ['kategori' => 'pembangunan_pondok_tahfidz']) }}"
-                    class="px-2.5 py-1 rounded-md transition-colors {{ $categoryFilter === 'pembangunan_pondok_tahfidz' ? 'bg-white text-gray-900 font-bold shadow-xs' : 'bg-white/10 text-gray-200 hover:bg-white/20' }}">
-                    Pembangunan Tahfidz
-                </a>
-            </div>
-        </div>
+    <!-- JUDUL LAPORAN -->
+    <div class="report-title-section">
+        <div class="report-title">Laporan Transparansi Keuangan & Donasi</div>
+        <div class="report-subtitle">Diterbitkan pada: {{ now()->translatedFormat('d F Y, H:i') }} WIB</div>
     </div>
 
-    <!-- Halaman Dokumen A4 -->
-    <div class="max-w-4xl mx-auto my-6 md:my-10 p-8 md:p-12 bg-white shadow-lg rounded-xl print:shadow-none print:m-0 print:p-0 print:rounded-none">
-
-        <!-- KOP SURAT YAYASAN RESMI -->
-        <div class="flex items-center justify-between gap-6 pb-4 border-b-2 border-black">
-            <div class="shrink-0">
-                <img src="{{ asset('images/logo-bun.webp') }}" alt="Logo Yayasan" class="h-16 md:h-20 w-auto object-contain"
-                    onerror="this.src='{{ asset('images/logoyabun.webp') }}'">
-            </div>
-            <div class="text-center flex-1">
-                <h1 class="text-lg md:text-xl font-extrabold uppercase tracking-wide text-black leading-tight">
-                    {{ $settings['nama_yayasan'] ?? 'Yayasan Bakti Umat Nusantara Cabang Kubu Raya' }}
-                </h1>
-                <p class="text-xs md:text-sm font-medium text-gray-700 mt-0.5">
-                    Mewujudkan Kebaikan Bersama Melalui Program Sosial, Pendidikan, dan Dakwah Keumatan
-                </p>
-                <p class="text-[11px] text-gray-600 mt-1 leading-snug">
-                    {{ $settings['alamat'] ?? 'Komplek Pondok Indah Lestari, Jln. Harmoni III Blok H4 No.2, Kec. Sungai Raya, Kab. Kubu Raya, Kalimantan Barat' }}
-                </p>
-                <p class="text-[11px] text-gray-600 mt-0.5">
-                    WhatsApp: <span class="font-semibold text-gray-800">{{ $settings['kontak_wa'] ?? '+62 819-3094-2890' }}</span> | Email: <span class="font-semibold text-gray-800">{{ $settings['email'] ?? 'ybaktiumat@gmail.com' }}</span>
-                </p>
-            </div>
-            <div class="shrink-0 w-16 md:w-20 hidden sm:block">
-                <img src="{{ asset('images/logoyabun.webp') }}" alt="Logo YABUN" class="h-14 w-auto object-contain mx-auto"
-                    onerror="this.style.display='none'">
-            </div>
-        </div>
-        <!-- Garis Tipis Tambahan Kop Surat -->
-        <div class="border-b border-black mt-1 mb-6"></div>
-
-        <!-- JUDUL & INFORMASI LAPORAN -->
-        <div class="text-center mb-6">
-            <h2 class="text-base md:text-lg font-extrabold uppercase tracking-wider text-black underline underline-offset-4">
-                Laporan Transparansi Keuangan & Donasi
-            </h2>
-            <p class="text-xs text-gray-600 mt-1">
-                Periode data: Per {{ now()->translatedFormat('d F Y, H:i') }} WIB
-            </p>
-        </div>
-
-        <!-- META DATA PENCETAKAN -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 p-4 rounded-lg bg-gray-50 border border-gray-300 text-xs print-card">
-            <div>
-                <span class="text-gray-600 block">Kategori Filter:</span>
-                <span class="font-bold text-black uppercase">
+    <!-- METADATA PENCETAKAN -->
+    <table class="meta-table">
+        <tr>
+            <td style="width: 34%;">
+                <span class="meta-label">Kategori Program:</span>
+                <span class="meta-val">
                     {{ $categoryFilter ? match($categoryFilter) {
                         'jumat_berkah' => 'Jumat Berkah',
                         'donasi_bantuan' => 'Donasi Bantuan',
@@ -147,148 +299,133 @@
                         default => ucwords(str_replace('_', ' ', (string) $categoryFilter))
                     } : 'Semua Program' }}
                 </span>
-            </div>
-            <div>
-                <span class="text-gray-600 block">Petugas Administrator:</span>
-                <span class="font-bold text-black">{{ $admin->nama ?? 'Administrator' }}</span>
-            </div>
-            <div>
-                <span class="text-gray-600 block">Total Data Transaksi:</span>
-                <span class="font-bold text-black font-mono">{{ $transactions->count() }} Transaksi</span>
-            </div>
-        </div>
+            </td>
+            <td style="width: 33%;">
+                <span class="meta-label">Petugas Administrator:</span>
+                <span class="meta-val">{{ $admin->nama ?? 'Administrator' }}</span>
+            </td>
+            <td style="width: 33%;">
+                <span class="meta-label">Total Data Transaksi:</span>
+                <span class="meta-val font-mono">{{ $transactions->count() }} Transaksi</span>
+            </td>
+        </tr>
+    </table>
 
-        <!-- RINGKASAN REKAPITULASI DANA -->
-        <div class="mb-6">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-black mb-2">
-                I. Ringkasan Perolehan Donasi Berdasarkan Program
-            </h3>
-            @php
-                $displayedCategories = $summary['categories'];
-                if ($categoryFilter && isset($summary['categories'][$categoryFilter])) {
-                    $displayedCategories = [$categoryFilter => $summary['categories'][$categoryFilter]];
-                }
-                $gridColsClass = count($displayedCategories) === 1 ? 'grid-cols-1' : (count($displayedCategories) === 2 ? 'grid-cols-2' : 'grid-cols-3');
-                $totalNominal = $categoryFilter ? $transactions->sum('amount') : $summary['grand_total'];
-            @endphp
-            <div class="grid {{ $gridColsClass }} gap-3">
-                @foreach ($displayedCategories as $cat)
-                    <div class="p-3.5 rounded-lg border border-gray-300 bg-gray-50 print-card">
-                        <span class="text-[11px] font-bold text-gray-700 uppercase block mb-1">{{ $cat['label'] }}</span>
-                        <p class="text-base font-extrabold font-mono text-black">
-                            {{ $cat['formatted'] ?? ('Rp ' . number_format($cat['amount'] ?? 0, 0, ',', '.')) }}
-                        </p>
+    <!-- RINGKASAN PEROLEHAN DONASI -->
+    <div class="section-heading">I. Ringkasan Perolehan Donasi Berdasarkan Program</div>
+    @php
+        $displayedCategories = $summary['categories'] ?? [];
+        if ($categoryFilter && isset($summary['categories'][$categoryFilter])) {
+            $displayedCategories = [$categoryFilter => $summary['categories'][$categoryFilter]];
+        }
+        $totalNominal = $categoryFilter ? $transactions->sum('amount') : ($summary['grand_total'] ?? $transactions->sum('amount'));
+        $cellWidth = count($displayedCategories) > 0 ? floor(100 / count($displayedCategories)) : 100;
+    @endphp
+    <table class="summary-table">
+        <tr>
+            @foreach ($displayedCategories as $cat)
+                <td class="summary-cell" style="width: {{ $cellWidth }}%;">
+                    <span class="summary-cell-title">{{ $cat['label'] }}</span>
+                    <div class="summary-cell-amount">
+                        {{ $cat['formatted'] ?? ('Rp ' . number_format($cat['amount'] ?? 0, 0, ',', '.')) }}
                     </div>
-                @endforeach
-            </div>
-            <div class="mt-3 p-3.5 bg-gray-100 border border-gray-400 rounded-lg flex items-center justify-between print-card">
-                <span class="text-xs font-bold text-black uppercase">
-                    {{ $categoryFilter ? 'Total Donasi Program Ini:' : 'Total Akumulasi Donasi Masuk:' }}
-                </span>
-                <span class="text-base md:text-lg font-black font-mono text-black">
-                    Rp {{ number_format($totalNominal, 0, ',', '.') }}
-                </span>
-            </div>
-        </div>
+                </td>
+            @endforeach
+        </tr>
+    </table>
 
-        <!-- DAFTAR TRANSAKSI DONASI -->
-        <div class="mb-8">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-black mb-2">
-                II. Rincian Riwayat Transaksi Donasi
-            </h3>
-            <div class="border border-black rounded-lg overflow-hidden">
-                <table class="w-full text-left text-xs border-collapse print-table">
-                    <thead>
-                        <tr class="bg-gray-100 border-b-2 border-black text-black font-extrabold uppercase text-[10px] tracking-wider">
-                            <th class="py-3 px-3 text-center w-12 border-r border-gray-300">No</th>
-                            <th class="py-3 px-3 w-28 text-center border-r border-gray-300">Tanggal</th>
-                            <th class="py-3 px-4 border-r border-gray-300">Nama Donatur</th>
-                            <th class="py-3 px-3 border-r border-gray-300">Kategori Program</th>
-                            <th class="py-3 px-3 text-center w-24 border-r border-gray-300">Jenis</th>
-                            <th class="py-3 px-4 text-right">Nominal (Rp)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-300">
-                        @php $subtotal = 0; @endphp
-                        @forelse ($transactions as $idx => $t)
-                            @php $subtotal += $t->amount; @endphp
-                            <tr class="even:bg-gray-50/70 hover:bg-gray-100/50 transition-colors">
-                                <td class="py-2.5 px-3 text-center text-gray-700 font-mono border-r border-gray-200">{{ $idx + 1 }}</td>
-                                <td class="py-2.5 px-3 text-center font-mono text-black whitespace-nowrap border-r border-gray-200">
-                                    {{ $t->transaction_date ? $t->transaction_date->format('d/m/Y') : '-' }}
-                                </td>
-                                <td class="py-2.5 px-4 font-bold text-black border-r border-gray-200">
-                                    {{ $t->donor->nama_donatur ?? 'Hamba Allah' }}
-                                </td>
-                                <td class="py-2.5 px-3 text-black font-semibold border-r border-gray-200">
-                                    {{ $t->category_label ?: match ($t->category) {
-                                        'jumat_berkah' => 'Jumat Berkah',
-                                        'donasi_bantuan' => 'Donasi Bantuan',
-                                        'pembangunan_pondok_tahfidz' => 'Pembangunan Pondok Tahfidz',
-                                        default => ucwords(str_replace('_', ' ', (string) $t->category)),
-                                    } }}
-                                </td>
-                                <td class="py-2.5 px-3 text-center border-r border-gray-200">
-                                    <span class="inline-block px-2 py-0.5 font-bold text-[10px] text-black bg-gray-100 rounded border border-gray-400 uppercase tracking-tight">
-                                        {{ $t->type }}
-                                    </span>
-                                </td>
-                                <td class="py-2.5 px-4 text-right font-mono font-bold text-black whitespace-nowrap">
-                                    {{ number_format($t->amount, 0, ',', '.') }}
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="py-8 text-center text-gray-500 italic">
-                                    Belum ada transaksi yang tercatat pada filter ini.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                    <tfoot>
-                        <tr class="bg-gray-100 border-t-2 border-black font-bold text-black">
-                            <td colspan="5" class="py-3 px-4 text-right uppercase text-[11px] tracking-wide border-r border-gray-300">
-                                Total Transaksi Tertera:
-                            </td>
-                            <td class="py-3 px-4 text-right font-mono text-sm font-black text-black whitespace-nowrap">
-                                Rp {{ number_format($subtotal, 0, ',', '.') }}
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
+    <table class="summary-total-banner">
+        <tr>
+            <td style="font-size: 8.5pt; text-transform: uppercase;">
+                {{ $categoryFilter ? 'Total Donasi Program Ini:' : 'Total Akumulasi Donasi Masuk:' }}
+            </td>
+            <td class="text-right font-mono" style="font-size: 11pt; color: #007A4D;">
+                Rp {{ number_format($totalNominal, 0, ',', '.') }}
+            </td>
+        </tr>
+    </table>
 
-        <!-- PERNYATAAN AKUNTABILITAS & PENGESAHAN -->
-        <div class="mt-10 pt-4 text-xs text-gray-700">
-            <div class="mb-6 p-3 bg-gray-50 border border-gray-200 rounded-lg text-[11px] leading-relaxed italic text-gray-600 print-card">
-                "Laporan ini diterbitkan secara transparan dan akuntabel oleh sistem manajemen donasi Yayasan Bakti Umat Nusantara Cabang Kubu Raya sebagai bentuk pertanggungjawaban amanah keumatan."
-            </div>
+    <!-- RINCIAN RIWAYAT TRANSAKSI -->
+    <div class="section-heading">II. Rincian Riwayat Transaksi Donasi</div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 28px;" class="text-center">No</th>
+                <th style="width: 70px;" class="text-center">Tanggal</th>
+                <th>Nama Donatur</th>
+                <th style="width: 120px;">Kategori Program</th>
+                <th style="width: 55px;" class="text-center">Jenis</th>
+                <th style="width: 95px;" class="text-right">Nominal (Rp)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php $subtotal = 0; @endphp
+            @forelse ($transactions as $idx => $t)
+                @php $subtotal += $t->amount; @endphp
+                <tr class="{{ $idx % 2 === 1 ? 'even' : '' }}">
+                    <td class="text-center font-mono">{{ $idx + 1 }}</td>
+                    <td class="text-center font-mono">
+                        {{ $t->transaction_date ? $t->transaction_date->format('d/m/Y') : '-' }}
+                    </td>
+                    <td>
+                        <strong>{{ $t->donor->nama_donatur ?? 'Hamba Allah' }}</strong>
+                    </td>
+                    <td>
+                        {{ $t->category_label ?: match ($t->category) {
+                            'jumat_berkah' => 'Jumat Berkah',
+                            'donasi_bantuan' => 'Donasi Bantuan',
+                            'pembangunan_pondok_tahfidz' => 'Pembangunan Pondok Tahfidz',
+                            default => ucwords(str_replace('_', ' ', (string) $t->category)),
+                        } }}
+                    </td>
+                    <td class="text-center">
+                        <span class="badge-type">{{ $t->type }}</span>
+                    </td>
+                    <td class="text-right font-mono">
+                        <strong>{{ number_format($t->amount, 0, ',', '.') }}</strong>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center" style="padding: 20px; font-style: italic; color: #64748B;">
+                        Belum ada transaksi yang tercatat pada filter ini.
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-right" style="text-transform: uppercase; font-size: 8pt;">
+                    Total Transaksi Tertera:
+                </td>
+                <td class="text-right font-mono" style="font-size: 9.5pt;">
+                    Rp {{ number_format($subtotal, 0, ',', '.') }}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 
-            <div class="flex items-start justify-between gap-8 pt-4">
-                <div class="text-center w-52">
-                    <p class="text-gray-600 mb-16">
-                        Mengetahui,<br>
-                        <strong>Pimpinan Yayasan</strong>
-                    </p>
-                    <p class="border-t border-gray-400 pt-1 font-bold text-gray-900">
-                        ( ........................................ )
-                    </p>
-                </div>
-
-                <div class="text-center w-52">
-                    <p class="text-gray-600 mb-16">
-                        Kubu Raya, {{ now()->translatedFormat('d F Y') }}<br>
-                        <strong>Bendahara / Administrasi</strong>
-                    </p>
-                    <p class="border-t border-gray-400 pt-1 font-bold text-gray-900">
-                        {{ $admin->nama ?? 'Administrator' }}
-                    </p>
-                </div>
-            </div>
-        </div>
-
+    <!-- AKUNTABILITAS & TANDA TANGAN -->
+    <div class="disclaimer-box">
+        "Laporan ini diterbitkan secara transparan dan akuntabel oleh sistem manajemen donasi Yayasan Bakti Umat Nusantara Cabang Kubu Raya sebagai bentuk pertanggungjawaban amanah keumatan."
     </div>
+
+    <table class="signature-table">
+        <tr>
+            <td>
+                <div>Mengetahui,</div>
+                <div style="font-weight: bold; margin-top: 2px;">Pimpinan Yayasan</div>
+                <div class="signature-space"></div>
+                <div class="signature-line">( ........................................ )</div>
+            </td>
+            <td>
+                <div>Kubu Raya, {{ now()->translatedFormat('d F Y') }}</div>
+                <div style="font-weight: bold; margin-top: 2px;">Bendahara / Administrasi</div>
+                <div class="signature-space"></div>
+                <div class="signature-line">{{ $admin->nama ?? 'Administrator' }}</div>
+            </td>
+        </tr>
+    </table>
 
 </body>
 </html>
