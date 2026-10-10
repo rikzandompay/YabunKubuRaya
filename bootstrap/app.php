@@ -14,14 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // SECURITY: Hanya trust proxy spesifik jika di belakang CDN/load balancer.
-        // Default: tidak trust proxy manapun (aman untuk direct access).
-        // Jika deploy di belakang Cloudflare/nginx, set TRUSTED_PROXIES di .env.
-        $trustedProxies = env('TRUSTED_PROXIES');
+        // SECURITY: Trust reverse proxy (Cloudflare/CDN/Tunnel) untuk mendeteksi HTTPS & client IP dengan benar.
+        $trustedProxies = env('TRUSTED_PROXIES', '*');
         if ($trustedProxies) {
-            $middleware->trustProxies(at: explode(',', $trustedProxies));
-        } else {
-            $middleware->trustProxies(at: null);
+            $middleware->trustProxies(at: $trustedProxies === '*' ? '*' : explode(',', $trustedProxies));
         }
 
         // SECURITY: Alias middleware untuk role-based access control

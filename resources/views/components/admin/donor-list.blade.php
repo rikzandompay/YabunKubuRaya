@@ -13,7 +13,7 @@
     </div>
 
     {{-- Body --}}
-    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-3 my-3 p-4 flex-1 flex flex-col border border-transparent dark:border-slate-800/80 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-2 my-2 sm:mx-3 sm:my-3 p-3.5 sm:p-4 flex-1 flex flex-col border border-transparent dark:border-slate-800/80 transition-colors duration-200">
         {{-- Tab pills --}}
         <div class="flex items-center gap-1 mb-3">
             <button

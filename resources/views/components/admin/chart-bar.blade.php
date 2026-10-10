@@ -21,11 +21,11 @@
     </div>
 
     {{-- Body --}}
-    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-3 my-3 p-4 sm:p-5 border border-transparent dark:border-slate-800/80 transition-colors duration-200">
+    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-2 my-2 sm:mx-3 sm:my-3 p-3.5 sm:p-5 border border-transparent dark:border-slate-800/80 transition-colors duration-200">
         {{-- Top row: big number + period selector --}}
-        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-5 sm:mb-6">
             <div>
-                <p class="text-3xl font-bold text-[#1E293B] dark:text-white" x-text="formattedTotal"></p>
+                <p class="text-2xl sm:text-3xl font-bold text-[#1E293B] dark:text-white" x-text="formattedTotal"></p>
                 <div class="flex flex-wrap items-center gap-2 mt-1">
                     <span class="inline-flex items-center gap-1.5 text-xs text-[#065F46] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 px-2.5 py-0.5 rounded-full font-medium">
                         ✓ Realtime Kas Manajemen
@@ -40,7 +40,7 @@
                     <button
                         @click="switchPeriod(p.key)"
                         :class="period === p.key ? 'bg-white dark:bg-slate-700 shadow-sm text-[#1E293B] dark:text-white font-medium' : 'text-[#64748B] dark:text-slate-400 hover:text-[#1E293B] dark:hover:text-white'"
-                        class="px-3 py-1 text-xs rounded-md transition-all focus-visible:ring-2 focus-visible:ring-[#065F46] cursor-pointer"
+                        class="px-2.5 sm:px-3 py-1 text-xs rounded-md transition-all focus-visible:ring-2 focus-visible:ring-[#065F46] cursor-pointer"
                         x-text="p.label"
                     ></button>
                 </template>

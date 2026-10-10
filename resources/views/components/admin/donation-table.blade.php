@@ -15,7 +15,7 @@
 @endphp
 
 <div
-    class="bg-[#F8FAFC] dark:bg-[#1E293B] rounded-xl border border-[#E2E8F0] dark:border-slate-800 transition-colors duration-200"
+    class="bg-[#F8FAFC] dark:bg-[#1E293B] rounded-xl border border-[#E2E8F0] dark:border-slate-800 transition-colors duration-200 min-w-0 w-full max-w-full overflow-hidden"
     x-data="donationTable()"
 >
     {{-- Header --}}
@@ -111,8 +111,8 @@
     </div>
 
     {{-- Table --}}
-    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-3 my-3 overflow-x-auto border border-transparent dark:border-slate-800/80 transition-colors duration-200">
-        <table class="w-full text-sm">
+    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-2 my-2 sm:mx-3 sm:my-3 overflow-x-auto border border-transparent dark:border-slate-800/80 transition-colors duration-200 min-w-0 max-w-full overscroll-x-contain" style="contain: paint; touch-action: pan-x pan-y; -webkit-overflow-scrolling: touch;">
+        <table class="w-full min-w-[540px] text-sm">
             <thead>
                 <tr class="border-b border-[#E2E8F0] dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/60">
                     <th class="w-10 px-3 py-3">

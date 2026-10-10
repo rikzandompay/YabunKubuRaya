@@ -260,9 +260,15 @@
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12 py-5">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-[11px] text-white/50">
             <p>© {{ date('Y') }} Yayasan Bakti Umat Nusantara Cabang Kubu Raya. All rights reserved.</p>
-            <div class="flex gap-5">
+            <div class="flex flex-wrap items-center gap-4 sm:gap-5">
                 <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
                 <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+                <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-1 hover:text-white transition-colors">
+                    <svg class="w-3 h-3 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25V9m12 8.25v-10.5A2.25 2.25 0 0018 4.5H6a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 006 19.5h12a2.25 2.25 0 002.25-2.25z" />
+                    </svg>
+                    <span>Login Admin</span>
+                </a>
             </div>
         </div>
     </div>

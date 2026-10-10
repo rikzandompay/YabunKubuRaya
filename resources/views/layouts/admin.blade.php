@@ -38,12 +38,20 @@
             display: none !important;
         }
 
-        html,
-        body {
-            touch-action: manipulation;
+        html {
+            touch-action: pan-y;
             -webkit-text-size-adjust: 100%;
-            overflow-x: hidden;
-            max-width: 100vw;
+            overflow-x: hidden !important;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+
+        body {
+            touch-action: pan-y;
+            overflow-x: hidden !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            overscroll-behavior-x: none;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -72,11 +80,11 @@
     <x-admin.sidebar />
 
     {{-- Main content area --}}
-    <div class="xl:ml-[240px] min-h-screen flex flex-col min-w-0 sidebar-transition"
+    <div class="xl:ml-[240px] min-h-screen flex flex-col min-w-0 overflow-x-hidden sidebar-transition"
         :class="sidebarCollapsed && 'xl:!ml-[64px]'">
         {{-- Topbar --}}
         <header
-            class="sticky top-0 z-30 bg-white dark:bg-[#1E293B] border-b border-[#E2E8F0] dark:border-slate-800 px-4 sm:px-6 h-14 flex items-center justify-between gap-4 transition-colors duration-200">
+            class="sticky top-0 z-30 bg-white dark:bg-[#1E293B] border-b border-[#E2E8F0] dark:border-slate-800 px-4 sm:px-6 h-14 flex items-center justify-between gap-4 transition-colors duration-200 w-full max-w-full">
             <div class="flex items-center gap-3">
                 {{-- Mobile hamburger --}}
                 <button @click="toggleMobileMenu()"
@@ -145,7 +153,7 @@
         </header>
 
         {{-- Page content --}}
-        <main class="flex-1 p-4 sm:p-6 min-w-0">
+        <main class="flex-1 p-3 sm:p-6 min-w-0 overflow-x-hidden">
             @yield('content')
         </main>
     </div>

@@ -5,12 +5,12 @@
 
 @section('content')
     {{-- Page header --}}
-    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
         <div>
-            <h1 class="text-xl sm:text-2xl font-bold text-[#1E293B] dark:text-white">
+            <h1 class="text-lg sm:text-2xl font-bold text-[#1E293B] dark:text-white">
                 Assalamu'alaikum, {{ auth()->user()->name ?? 'Admin' }}
             </h1>
-            <p class="mt-1 text-sm text-[#64748B] dark:text-slate-400">
+            <p class="mt-0.5 sm:mt-1 text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
                 Ringkasan donasi, donatur, artikel, dan kegiatan terbaru Yayasan Bakti Umat Nusantara Cabang Kubu Raya.
             </p>
         </div>
@@ -67,8 +67,8 @@
         </div>
     </div>
 
-    {{-- Grid: 4 KPI Cards (Sejajar Halaman) --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    {{-- Grid: 4 KPI Cards (2 Kolom Kompak di Mobile, 4 Kolom di Desktop) --}}
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mb-4 sm:mb-6">
         @foreach ($stats as $stat)
             <x-admin.stat-card
                 :title="$stat['title']"
@@ -85,21 +85,21 @@
     </div>
 
     {{-- Grid Row 2: Grafik Batang Donasi (Kiri 2/3) + Donut Chart Komposisi Kategori (Kanan 1/3) --}}
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6 items-stretch">
-        <div class="lg:col-span-2 min-w-0">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6 items-stretch w-full max-w-full min-w-0">
+        <div class="lg:col-span-2 min-w-0 w-full max-w-full">
             <x-admin.chart-bar :chart-data="$chartData" />
         </div>
-        <div class="lg:col-span-1 min-w-0">
+        <div class="lg:col-span-1 min-w-0 w-full max-w-full">
             <x-admin.chart-donut :donut-data="$donutData" />
         </div>
     </div>
 
     {{-- Grid Row 3: Donatur Terbanyak (Kiri 1/3) + Monitoring Donasi Masuk (Kanan 2/3) --}}
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6 items-stretch">
-        <div class="lg:col-span-1 min-w-0">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6 items-stretch w-full max-w-full min-w-0">
+        <div class="lg:col-span-1 min-w-0 w-full max-w-full">
             <x-admin.donor-list :donors="$topDonors" :total-donors-count="$totalDonorsCount ?? null" />
         </div>
-        <div class="lg:col-span-2 min-w-0">
+        <div class="lg:col-span-2 min-w-0 w-full max-w-full">
             <x-admin.donation-table :donations="$donations" />
         </div>
     </div>

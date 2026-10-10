@@ -1,7 +1,7 @@
 <nav id="admin-sidebar" aria-label="Sidebar"
-    class="fixed top-0 left-0 z-50 h-full bg-[#F8FAFC] dark:bg-[#0F172A] border-r border-[#E2E8F0] dark:border-slate-800 flex flex-col sidebar-transition overflow-y-auto overflow-x-hidden transition-colors duration-200"
+    class="fixed top-0 left-0 z-50 h-full bg-[#F8FAFC] dark:bg-[#0F172A] border-r border-[#E2E8F0] dark:border-slate-800 flex flex-col sidebar-transition overflow-y-auto overflow-x-hidden transition-colors duration-200 -translate-x-full xl:translate-x-0"
     :class="[
-        mobileMenuOpen ? 'translate-x-0' : '-translate-x-full xl:translate-x-0',
+        mobileMenuOpen ? '!translate-x-0' : '-translate-x-full xl:translate-x-0',
         sidebarCollapsed ? 'w-[64px]' : 'w-[240px]'
     ]"
     x-data="sidebarNav()">

@@ -16,7 +16,7 @@
 @endphp
 
 <svg
-    class="w-20 h-8 shrink-0"
+    {{ $attributes->merge(['class' => 'w-14 h-5 sm:w-20 sm:h-8 shrink-0']) }}
     viewBox="0 0 80 32"
     fill="none"
     role="img"

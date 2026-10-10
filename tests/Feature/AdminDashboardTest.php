@@ -246,4 +246,21 @@ class AdminDashboardTest extends TestCase
         $this->assertEquals(4000000.0, $jumat['total']);
         $this->assertEquals(40.0, $jumat['percentage']);
     }
+
+    public function test_dashboard_renders_compact_responsive_mobile_card_grid(): void
+    {
+        $user = User::factory()->create([
+            'nama' => 'Admin Mobile Test',
+            'peran' => 'admin',
+        ]);
+
+        $response = $this->actingAs($user)->get(route('admin.dashboard'));
+
+        $response->assertStatus(200);
+        // Memastikan container 4 KPI card menggunakan grid-cols-2 untuk tampilan mobile yang kompak
+        $response->assertSee('grid grid-cols-2 lg:grid-cols-4', false);
+        // Memastikan layout mobile dan desktop pada stat-card ter-render
+        $response->assertSee('block sm:hidden', false);
+        $response->assertSee('hidden sm:flex', false);
+    }
 }

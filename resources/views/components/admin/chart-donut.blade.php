@@ -37,10 +37,10 @@
     </div>
 
     {{-- Body --}}
-    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-3 mb-3 mt-3 p-4 sm:p-5 flex-1 flex flex-col justify-between transition-colors duration-200">
+    <div class="bg-white dark:bg-[#0F172A] rounded-lg mx-2 my-2 sm:mx-3 sm:mb-3 sm:mt-3 p-3.5 sm:p-5 flex-1 flex flex-col justify-between transition-colors duration-200">
         {{-- Donut Chart Visual --}}
-        <div class="relative flex items-center justify-center my-3">
-            <svg class="w-56 h-56 sm:w-60 sm:h-60 xl:w-64 xl:h-64 transform transition-transform" viewBox="0 0 160 160">
+        <div class="relative flex items-center justify-center my-2 sm:my-3">
+            <svg class="w-48 h-48 sm:w-60 sm:h-60 xl:w-64 xl:h-64 transform transition-transform" viewBox="0 0 160 160">
                 {{-- Base background track --}}
                 <circle
                     cx="80"
