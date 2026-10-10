@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\URL;
 
 class Article extends Model
 {
@@ -40,14 +41,24 @@ class Article extends Model
 
     public static function generateStaticSitemap(): void
     {
+        if (app()->runningUnitTests()) {
+            return;
+        }
+
         try {
             $articles = self::published()
                 ->select('id', 'slug', 'updated_at', 'published_at')
                 ->orderByDesc('published_at')
                 ->get();
 
+            $previousRoot = url('/');
+            URL::forceRootUrl('https://yabunkuburaya.org');
+            URL::forceScheme('https');
+
             $content = view('sitemap', compact('articles'))->render();
             file_put_contents(public_path('sitemap.xml'), $content);
+
+            URL::forceRootUrl($previousRoot);
         } catch (\Throwable) {
             // Ignore if in migration or cli environment without database
         }

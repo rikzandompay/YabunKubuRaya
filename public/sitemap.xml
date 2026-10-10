@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://localhost</loc>
+        <loc>https://yabunkuburaya.org</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>http://localhost/artikel</loc>
+        <loc>https://yabunkuburaya.org/artikel</loc>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost/galeri</loc>
+        <loc>https://yabunkuburaya.org/galeri</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>http://localhost/artikel/beasiswa-santri-yabun</loc>
-        <lastmod>2026-10-10T10:38:05+00:00</lastmod>
+        <loc>https://yabunkuburaya.org/artikel/kegiatan-santunan-akbar-dhuafa</loc>
+        <lastmod>2026-10-05T14:22:44+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://yabunkuburaya.org/artikel/bakti-sosial-kepada-masyarakat-kurang-mampu-dbjIM</loc>
+        <lastmod>2026-10-05T14:03:01+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://yabunkuburaya.org/artikel/mengasah-ilmu-parenting-sambil-berbagi-kasih-hadiri-seminar-dan-santunan-bakti-umat-nusantara-PTuf9</loc>
+        <lastmod>2026-10-05T14:11:23+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
