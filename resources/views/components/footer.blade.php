@@ -5,16 +5,14 @@
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12 pt-14 pb-10">
         <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-3 md:gap-4 max-w-3xl">
             <!-- Logo 1: BUN -->
-            <a href="{{ url('/') }}"
-                aria-label="Beranda Yayasan Bakti Umat Nusantara"
+            <a href="{{ url('/') }}" aria-label="Beranda Yayasan Bakti Umat Nusantara"
                 class="flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3 hover:opacity-95 transition-opacity">
                 <img src="{{ asset('images/logo-bun.webp') }}" alt="Logo Yayasan Bakti Umat Nusantara" width="140"
                     height="40" class="h-8 md:h-10 w-auto max-w-full object-contain"
                     onerror="this.src='{{ asset('images/logo-bun.jpeg') }}'" loading="lazy" decoding="async" />
             </a>
             <!-- Logo 2: YABUN -->
-            <a href="{{ url('/') }}"
-                aria-label="Beranda YABUN Cabang Kubu Raya"
+            <a href="{{ url('/') }}" aria-label="Beranda YABUN Cabang Kubu Raya"
                 class="flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3 hover:opacity-95 transition-opacity">
                 <img src="{{ asset('images/logoyabun.webp') }}" alt="Logo YABUN" width="140" height="40"
                     class="h-8 md:h-10 w-auto max-w-full object-contain"
@@ -28,12 +26,13 @@
             </div>
             <!-- Logo 4: Notaris / PPAT -->
             <div class="flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3">
-                <img src="{{ asset('images/logoppat.webp') }}" alt="Logo Notaris PPAT" width="140"
-                    height="40" class="h-8 md:h-10 w-auto max-w-full object-contain"
+                <img src="{{ asset('images/logoppat.webp') }}" alt="Logo Notaris PPAT" width="140" height="40"
+                    class="h-8 md:h-10 w-auto max-w-full object-contain"
                     onerror="this.src='{{ asset('images/logoppat.png') }}'" loading="lazy" decoding="async" />
             </div>
             <!-- Logo 5: Kabupaten Kubu Raya -->
-            <div class="col-span-2 sm:col-auto flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3">
+            <div
+                class="col-span-2 sm:col-auto flex items-center justify-center bg-white p-2 rounded-md h-12 md:h-14 px-3">
                 <img src="{{ asset('images/logo-kuburaya.webp') }}" alt="Logo Kabupaten Kubu Raya" width="140"
                     height="40" class="h-8 md:h-10 w-auto max-w-full object-contain"
                     onerror="this.src='{{ asset('images/logo-kuburaya.png') }}'" loading="lazy" decoding="async" />
@@ -58,7 +57,8 @@
                         Buka di Maps ↗
                     </a>
                 </div>
-                <div class="relative overflow-hidden border border-white/20 rounded-md" style="position: relative; aspect-ratio: 4/3;">
+                <div class="relative overflow-hidden border border-white/20 rounded-md"
+                    style="position: relative; aspect-ratio: 4/3;">
                     <iframe
                         src="https://maps.google.com/maps?q=Yayasan+Bakti+Umat+Nusantara+Pontianak&t=&z=16&ie=UTF8&iwloc=&output=embed"
                         width="100%" height="100%" style="border: 0; position: absolute; inset: 0;"
@@ -67,7 +67,9 @@
                 </div>
                 <div class="text-xs text-white/70 space-y-1">
                     <p class="font-semibold text-white text-[11px] uppercase tracking-wide">Alamat Kantor:</p>
-                    <p class="leading-relaxed">{{ !empty($siteSettings['alamat']) ? $siteSettings['alamat'] : 'Komplek Pondok Indah Lestari, Jln. Harmoni III Blok H4 No.2, RT.005/RW.011, Desa Parit Baru, Kec. Sungai Raya, Kabupaten Kubu Raya, Kalimantan Barat 78123' }}</p>
+                    <p class="leading-relaxed">
+                        {{ !empty($siteSettings['alamat']) ? $siteSettings['alamat'] : 'Komplek Pondok Indah Lestari, Jln. Harmoni III Blok H4 No.2, RT.005/RW.011, Desa Parit Baru, Kec. Sungai Raya, Kabupaten Kubu Raya, Kalimantan Barat 78123' }}
+                    </p>
                 </div>
             </div>
 
@@ -144,7 +146,8 @@
                             }
                             $cleanNum = preg_replace('/[^0-9]/', '', $bank->nomor_rekening);
                         @endphp
-                        <div class="bg-white/10 rounded-md p-3 hover:bg-white/15 transition-colors border border-white/10">
+                        <div
+                            class="bg-white/10 rounded-md p-3 hover:bg-white/15 transition-colors border border-white/10">
                             <div class="flex items-center justify-between gap-2 mb-2">
                                 <div class="bg-white rounded px-2 py-1 flex items-center justify-center h-8">
                                     <img src="{{ $logo }}" alt="{{ $bank->nama_bank }}" width="80"
@@ -188,7 +191,9 @@
 
             <!-- Column 4: Kontak & Social Media -->
             @php
-                $waRaw = !empty($siteSettings['kontak_wa']) ? preg_replace('/[^0-9]/', '', $siteSettings['kontak_wa']) : '6281930942890';
+                $waRaw = !empty($siteSettings['kontak_wa'])
+                    ? preg_replace('/[^0-9]/', '', $siteSettings['kontak_wa'])
+                    : '6281930942890';
                 if (str_starts_with($waRaw, '0')) {
                     $waRaw = '62' . substr($waRaw, 1);
                 }
@@ -263,10 +268,8 @@
             <div class="flex flex-wrap items-center gap-4 sm:gap-5">
                 <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
                 <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
-                <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-1 hover:text-white transition-colors">
-                    <svg class="w-3 h-3 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25V9m12 8.25v-10.5A2.25 2.25 0 0018 4.5H6a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 006 19.5h12a2.25 2.25 0 002.25-2.25z" />
-                    </svg>
+                <a href="{{ route('admin.dashboard') }}"
+                    class="inline-flex items-center gap-1 hover:text-white transition-colors">
                     <span>Login Admin</span>
                 </a>
             </div>
