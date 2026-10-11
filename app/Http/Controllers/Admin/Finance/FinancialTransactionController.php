@@ -21,9 +21,16 @@ class FinancialTransactionController extends Controller
     public function index(Request $request): View
     {
         $categoryFilter = $request->query('kategori');
+        $typeFilter = $request->query('jenis');
         $validCategories = ['jumat_berkah', 'donasi_bantuan', 'pembangunan_pondok_tahfidz'];
+        $validTypes = ['pemasukan', 'pengeluaran'];
 
-        $query = FinancialTransaction::whereHas('donor')
+        $query = FinancialTransaction::where(function ($q) {
+            $q->where('type', 'pengeluaran')
+                ->orWhere(function ($sub) {
+                    $sub->where('type', 'pemasukan')->whereNotNull('donor_id');
+                });
+        })
             ->with('donor')
             ->orderByDesc('transaction_date')
             ->orderByDesc('id');
@@ -32,10 +39,16 @@ class FinancialTransactionController extends Controller
             $query->where('category', $categoryFilter);
         }
 
+        if ($typeFilter && in_array($typeFilter, $validTypes, true)) {
+            $query->where('type', $typeFilter);
+        }
+
         $transactions = $query->paginate(15)->withQueryString();
         $summary = FinanceSummaryService::totalsByCategory(fresh: true);
         $donors = Donatur::orderBy('nama_donatur')->get();
-        $totalTransactionsCount = FinancialTransaction::whereHas('donor')->pemasukan()->count();
+        $totalTransactionsCount = FinancialTransaction::count();
+        $totalIncomeCount = FinancialTransaction::pemasukan()->count();
+        $totalExpenseCount = FinancialTransaction::pengeluaran()->count();
         $totalDonorsCount = Donatur::count();
 
         return view('admin.finance.index', compact(
@@ -43,7 +56,10 @@ class FinancialTransactionController extends Controller
             'summary',
             'donors',
             'categoryFilter',
+            'typeFilter',
             'totalTransactionsCount',
+            'totalIncomeCount',
+            'totalExpenseCount',
             'totalDonorsCount'
         ));
     }
@@ -61,21 +77,36 @@ class FinancialTransactionController extends Controller
             ]);
         }
 
-        $validated = $request->validate([
+        $type = $request->input('type', 'pemasukan');
+
+        $rules = [
             'type' => 'required|in:pemasukan,pengeluaran',
             'category' => 'required|in:jumat_berkah,donasi_bantuan,pembangunan_pondok_tahfidz',
             'amount' => 'required|numeric|min:1',
-            'donor_id' => 'required|exists:donatur,id',
-            'description' => 'nullable|string|max:500',
             'transaction_date' => 'required|date',
-        ], [
-            'donor_id.required' => 'Donatur wajib dipilih untuk setiap transaksi donasi.',
+            'donor_id' => $type === 'pemasukan' ? 'required|exists:donatur,id' : 'nullable',
+            'description' => $type === 'pengeluaran' ? 'required|string|max:500' : 'nullable|string|max:500',
+        ];
+
+        $messages = [
+            'donor_id.required' => 'Donatur wajib dipilih untuk transaksi pemasukan donasi.',
             'donor_id.exists' => 'Data donatur tidak valid.',
-        ]);
+            'description.required' => 'Keterangan pengeluaran wajib diisi (rincian keperluan belanja/penyaluran program).',
+        ];
+
+        $validated = $request->validate($rules, $messages);
+
+        if ($type === 'pengeluaran') {
+            $validated['donor_id'] = null;
+        }
 
         FinancialTransaction::create($validated);
 
-        return redirect()->route('admin.keuangan.index')->with('success', 'Transaksi berhasil disimpan. Statistik transparansi donasi telah diperbarui secara otomatis.');
+        $successMsg = $type === 'pengeluaran'
+            ? 'Transaksi pengeluaran berhasil dicatat. Sisa saldo kas telah diperbarui secara otomatis.'
+            : 'Transaksi pemasukan berhasil disimpan. Statistik transparansi donasi telah diperbarui secara otomatis.';
+
+        return redirect()->route('admin.keuangan.index')->with('success', $successMsg);
     }
 
     /**
@@ -98,17 +129,28 @@ class FinancialTransactionController extends Controller
     public function exportPdf(Request $request): Response
     {
         $categoryFilter = $request->query('kategori');
+        $typeFilter = $request->query('jenis');
         $validCategories = ['jumat_berkah', 'donasi_bantuan', 'pembangunan_pondok_tahfidz'];
+        $validTypes = ['pemasukan', 'pengeluaran'];
 
         $periodFilter = $request->query('periode');
 
-        $query = FinancialTransaction::whereHas('donor')
+        $query = FinancialTransaction::where(function ($q) {
+            $q->where('type', 'pengeluaran')
+                ->orWhere(function ($sub) {
+                    $sub->where('type', 'pemasukan')->whereNotNull('donor_id');
+                });
+        })
             ->with('donor')
             ->orderByDesc('transaction_date')
             ->orderByDesc('id');
 
         if ($categoryFilter && in_array($categoryFilter, $validCategories, true)) {
             $query->where('category', $categoryFilter);
+        }
+
+        if ($typeFilter && in_array($typeFilter, $validTypes, true)) {
+            $query->where('type', $typeFilter);
         }
 
         if ($periodFilter && $periodFilter !== 'semua') {
@@ -143,9 +185,10 @@ class FinancialTransactionController extends Controller
             'transactions',
             'summary',
             'settings',
-            'admin',
             'categoryFilter',
+            'typeFilter',
             'periodFilter',
+            'admin',
             'logoLeft',
             'logoRight'
         ))->setPaper('a4', 'portrait');

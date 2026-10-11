@@ -123,19 +123,29 @@ html.dark .admin-theme {
 
 /* Surfaces & Cards */
 html.dark .admin-theme .bg-white {
-    background-color: #1E293B;
+    background-color: #1E293B !important;
 }
 
 html.dark .admin-theme .bg-\[\#F8FAFC\],
 html.dark .admin-theme .bg-slate-50,
-html.dark .admin-theme .bg-gray-50 {
-    background-color: #0F172A;
+html.dark .admin-theme .bg-gray-50,
+html.dark .admin-theme [class*="bg-gray-50"],
+html.dark .admin-theme [class*="bg-slate-50"] {
+    background-color: #0F172A !important;
 }
 
 html.dark .admin-theme .bg-\[\#F1F5F9\],
 html.dark .admin-theme .bg-slate-100,
-html.dark .admin-theme .bg-gray-100 {
-    background-color: #334155;
+html.dark .admin-theme .bg-gray-100,
+html.dark .admin-theme [class*="bg-gray-100"],
+html.dark .admin-theme [class*="bg-slate-100"] {
+    background-color: #334155 !important;
+}
+
+/* Card Gradients (Prevents washed-out white gradient cards) */
+html.dark .admin-theme [class*="bg-gradient"] {
+    background-image: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+    border-color: rgba(16, 185, 129, 0.25) !important;
 }
 
 /* Borders & Dividers */
@@ -144,24 +154,30 @@ html.dark .admin-theme .border-\[\#CBD5E1\],
 html.dark .admin-theme .border-\[\#E5E7EB\],
 html.dark .admin-theme .border-slate-200,
 html.dark .admin-theme .border-gray-200,
-html.dark .admin-theme .border-gray-300 {
-    border-color: #334155;
+html.dark .admin-theme .border-gray-100,
+html.dark .admin-theme .border-gray-300,
+html.dark .admin-theme [class*="border-emerald-100"],
+html.dark .admin-theme [class*="border-rose-100"],
+html.dark .admin-theme [class*="border-amber-100"],
+html.dark .admin-theme [class*="border-teal-100"] {
+    border-color: #334155 !important;
 }
 
 html.dark .admin-theme .divide-\[\#E2E8F0\],
 html.dark .admin-theme .divide-slate-200,
 html.dark .admin-theme .divide-gray-200,
+html.dark .admin-theme .divide-gray-100,
 html.dark .admin-theme .divide-\[\#F1F5F9\] {
-    border-color: #334155;
+    border-color: #334155 !important;
 }
 
-/* Typography */
+/* Typography & Contrast */
 html.dark .admin-theme .text-\[\#1E293B\],
 html.dark .admin-theme .text-slate-900,
 html.dark .admin-theme .text-slate-800,
 html.dark .admin-theme .text-gray-900,
 html.dark .admin-theme .text-gray-800 {
-    color: #F8FAFC;
+    color: #F8FAFC !important;
 }
 
 html.dark .admin-theme .text-\[\#64748B\],
@@ -169,17 +185,72 @@ html.dark .admin-theme .text-slate-600,
 html.dark .admin-theme .text-slate-500,
 html.dark .admin-theme .text-gray-600,
 html.dark .admin-theme .text-gray-500 {
-    color: #94A3B8;
+    color: #94A3B8 !important;
 }
 
 html.dark .admin-theme .text-\[\#475569\],
 html.dark .admin-theme .text-slate-700,
 html.dark .admin-theme .text-gray-700 {
-    color: #CBD5E1;
+    color: #CBD5E1 !important;
 }
 
 html.dark .admin-theme .text-\[\#94A3B8\] {
-    color: #64748B;
+    color: #64748B !important;
+}
+
+/* Brand & Semantic Text Highlights */
+html.dark .admin-theme .text-\[\#00843D\],
+html.dark .admin-theme .text-\[\#065F46\],
+html.dark .admin-theme .text-emerald-800,
+html.dark .admin-theme .text-emerald-700,
+html.dark .admin-theme .text-emerald-600 {
+    color: #34D399 !important;
+}
+
+html.dark .admin-theme .text-rose-800,
+html.dark .admin-theme .text-rose-700,
+html.dark .admin-theme .text-rose-600,
+html.dark .admin-theme .text-red-800,
+html.dark .admin-theme .text-red-700,
+html.dark .admin-theme .text-red-600 {
+    color: #FB7185 !important;
+}
+
+html.dark .admin-theme .text-amber-800,
+html.dark .admin-theme .text-amber-700,
+html.dark .admin-theme .text-amber-600 {
+    color: #FCD34D !important;
+}
+
+html.dark .admin-theme .text-teal-800,
+html.dark .admin-theme .text-teal-700,
+html.dark .admin-theme .text-teal-600 {
+    color: #5EEAD4 !important;
+}
+
+/* Tables in Dark Mode */
+html.dark .admin-theme table thead tr {
+    background-color: #0F172A !important;
+    border-color: #334155 !important;
+}
+
+html.dark .admin-theme table thead th {
+    color: #94A3B8 !important;
+    background-color: transparent !important;
+}
+
+html.dark .admin-theme table tbody tr {
+    border-color: #334155 !important;
+}
+
+html.dark .admin-theme table tbody tr:hover,
+html.dark .admin-theme [class*="hover\:bg-gray-50"]:hover,
+html.dark .admin-theme [class*="hover\:bg-slate-50"]:hover {
+    background-color: rgba(51, 65, 85, 0.45) !important;
+}
+
+html.dark .admin-theme table td {
+    color: #E2E8F0 !important;
 }
 
 /* Hover States */
@@ -217,49 +288,41 @@ html.dark .admin-theme select option {
     color: #F8FAFC;
 }
 
-/* Alerts */
-html.dark .admin-theme .bg-emerald-50 {
-    background-color: rgba(6, 95, 70, 0.25);
-    border-color: rgba(16, 185, 129, 0.3);
-    color: #A7F3D0;
+/* Badges & Alert Containers */
+html.dark .admin-theme [class*="bg-emerald-50"],
+html.dark .admin-theme [class*="bg-emerald-100"] {
+    background-color: rgba(6, 95, 70, 0.3) !important;
+    border-color: rgba(16, 185, 129, 0.3) !important;
+    color: #6EE7B7 !important;
 }
 
-html.dark .admin-theme .bg-red-50 {
-    background-color: rgba(153, 27, 27, 0.25);
-    border-color: rgba(239, 68, 68, 0.3);
-    color: #FECACA;
+html.dark .admin-theme [class*="bg-rose-50"],
+html.dark .admin-theme [class*="bg-rose-100"],
+html.dark .admin-theme [class*="bg-red-50"],
+html.dark .admin-theme [class*="bg-red-100"] {
+    background-color: rgba(153, 27, 27, 0.3) !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+    color: #FECACA !important;
 }
 
-html.dark .admin-theme .bg-amber-50 {
-    background-color: rgba(180, 83, 9, 0.25);
-    border-color: rgba(245, 158, 11, 0.3);
-    color: #FDE68A;
+html.dark .admin-theme [class*="bg-amber-50"],
+html.dark .admin-theme [class*="bg-amber-100"] {
+    background-color: rgba(180, 83, 9, 0.3) !important;
+    border-color: rgba(245, 158, 11, 0.3) !important;
+    color: #FDE68A !important;
 }
 
-html.dark .admin-theme .bg-blue-50 {
-    background-color: rgba(30, 64, 175, 0.25);
-    border-color: rgba(59, 130, 246, 0.3);
-    color: #BFDBFE;
+html.dark .admin-theme [class*="bg-teal-50"],
+html.dark .admin-theme [class*="bg-teal-100"] {
+    background-color: rgba(13, 148, 136, 0.3) !important;
+    border-color: rgba(20, 184, 166, 0.3) !important;
+    color: #99F6E4 !important;
 }
 
-/* Badges */
-html.dark .admin-theme .bg-emerald-100 {
-    background-color: rgba(16, 185, 129, 0.2);
-    color: #6EE7B7;
-}
-
-html.dark .admin-theme .bg-red-100 {
-    background-color: rgba(239, 68, 68, 0.2);
-    color: #FCA5A5;
-}
-
-html.dark .admin-theme .bg-blue-100 {
-    background-color: rgba(59, 130, 246, 0.2);
-    color: #93C5FD;
-}
-
-html.dark .admin-theme .bg-amber-100 {
-    background-color: rgba(245, 158, 11, 0.2);
-    color: #FCD34D;
+html.dark .admin-theme [class*="bg-blue-50"],
+html.dark .admin-theme [class*="bg-blue-100"] {
+    background-color: rgba(30, 64, 175, 0.3) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+    color: #BFDBFE !important;
 }
 

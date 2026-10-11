@@ -46,6 +46,14 @@ class FinancialTransaction extends Model
     }
 
     /**
+     * Scope untuk transaksi bertipe pengeluaran.
+     */
+    public function scopePengeluaran(Builder $query): Builder
+    {
+        return $query->where('type', 'pengeluaran');
+    }
+
+    /**
      * Scope untuk memfilter berdasarkan kategori transaksi.
      */
     public function scopeKategori(Builder $query, string $category): Builder

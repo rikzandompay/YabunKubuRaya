@@ -51,7 +51,23 @@ class FinanceSummaryService
 
             $grandTotal = $jumatBerkah + $donasiBantuan + $pondokTahfidz;
 
-            // 2. Ambil tanggal transaksi terbaru
+            // 2. Hitung total pengeluaran per kategori
+            $pengeluaranJumat = (float) FinancialTransaction::pengeluaran()
+                ->kategori('jumat_berkah')
+                ->sum('amount');
+
+            $pengeluaranBantuan = (float) FinancialTransaction::pengeluaran()
+                ->kategori('donasi_bantuan')
+                ->sum('amount');
+
+            $pengeluaranTahfidz = (float) FinancialTransaction::pengeluaran()
+                ->kategori('pembangunan_pondok_tahfidz')
+                ->sum('amount');
+
+            $totalPengeluaran = $pengeluaranJumat + $pengeluaranBantuan + $pengeluaranTahfidz;
+            $saldoKas = $grandTotal - $totalPengeluaran;
+
+            // 3. Ambil tanggal transaksi terbaru
             $latest = FinancialTransaction::orderByDesc('transaction_date')
                 ->orderByDesc('id')
                 ->first();
@@ -92,6 +108,10 @@ class FinanceSummaryService
                         'formatted' => 'Rp '.number_format($jumatBerkah, 0, ',', '.'),
                         'unit' => self::resolveUnit($jumatBerkah),
                         'description' => 'Total dana yang terkumpul dari program Jumat Berkah.',
+                        'expense_amount' => $pengeluaranJumat,
+                        'expense_formatted' => 'Rp '.number_format($pengeluaranJumat, 0, ',', '.'),
+                        'balance' => $jumatBerkah - $pengeluaranJumat,
+                        'balance_formatted' => 'Rp '.number_format($jumatBerkah - $pengeluaranJumat, 0, ',', '.'),
                     ],
                     'donasi_bantuan' => [
                         'key' => 'donasi_bantuan',
@@ -101,6 +121,10 @@ class FinanceSummaryService
                         'formatted' => 'Rp '.number_format($donasiBantuan, 0, ',', '.'),
                         'unit' => self::resolveUnit($donasiBantuan),
                         'description' => 'Total dana donasi bantuan yang diterima dan disalurkan.',
+                        'expense_amount' => $pengeluaranBantuan,
+                        'expense_formatted' => 'Rp '.number_format($pengeluaranBantuan, 0, ',', '.'),
+                        'balance' => $donasiBantuan - $pengeluaranBantuan,
+                        'balance_formatted' => 'Rp '.number_format($donasiBantuan - $pengeluaranBantuan, 0, ',', '.'),
                     ],
                     'pembangunan_pondok_tahfidz' => [
                         'key' => 'pembangunan_pondok_tahfidz',
@@ -110,11 +134,20 @@ class FinanceSummaryService
                         'formatted' => 'Rp '.number_format($pondokTahfidz, 0, ',', '.'),
                         'unit' => self::resolveUnit($pondokTahfidz),
                         'description' => 'Total dana yang terkumpul untuk pembangunan pondok tahfidz.',
+                        'expense_amount' => $pengeluaranTahfidz,
+                        'expense_formatted' => 'Rp '.number_format($pengeluaranTahfidz, 0, ',', '.'),
+                        'balance' => $pondokTahfidz - $pengeluaranTahfidz,
+                        'balance_formatted' => 'Rp '.number_format($pondokTahfidz - $pengeluaranTahfidz, 0, ',', '.'),
                     ],
                 ],
                 'grand_total' => $grandTotal,
                 'grand_total_formatted' => 'Rp '.number_format($grandTotal, 0, ',', '.'),
                 'grand_total_unit' => self::resolveUnit($grandTotal),
+                'total_expense' => $totalPengeluaran,
+                'total_expense_formatted' => 'Rp '.number_format($totalPengeluaran, 0, ',', '.'),
+                'balance' => $saldoKas,
+                'balance_formatted' => 'Rp '.number_format($saldoKas, 0, ',', '.'),
+                'balance_unit' => self::resolveUnit(abs($saldoKas)),
                 'latest_transaction_date' => $latestDate?->toDateString(),
                 'latest_date_formatted' => $formattedLatestDate,
             ];

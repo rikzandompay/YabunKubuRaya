@@ -109,4 +109,64 @@ class DonationTransparencyTest extends TestCase
         $response = $this->get(route('admin.keuangan.index'));
         $response->assertRedirect(route('login'));
     }
+
+    public function test_admin_can_create_expense_transaction_without_donor(): void
+    {
+        $admin = User::factory()->create(['peran' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.keuangan.store'), [
+            'type' => 'pengeluaran',
+            'category' => 'jumat_berkah',
+            'amount' => 3500000,
+            'transaction_date' => '2026-10-10',
+            'description' => 'Pembelian 50 paket beras Jumat Berkah',
+        ]);
+
+        $response->assertRedirect(route('admin.keuangan.index'));
+        $response->assertSessionHas('success');
+
+        $this->assertDatabaseHas('financial_transactions', [
+            'type' => 'pengeluaran',
+            'category' => 'jumat_berkah',
+            'amount' => 3500000,
+            'donor_id' => null,
+            'description' => 'Pembelian 50 paket beras Jumat Berkah',
+        ]);
+
+        $indexResponse = $this->actingAs($admin)->get(route('admin.keuangan.index'));
+        $indexResponse->assertStatus(200);
+        $indexResponse->assertSee('- Rp 3.500.000', false);
+        $indexResponse->assertSee('Internal Yayasan');
+        $indexResponse->assertSee('Pembelian 50 paket beras Jumat Berkah');
+    }
+
+    public function test_expense_transaction_requires_description(): void
+    {
+        $admin = User::factory()->create(['peran' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.keuangan.store'), [
+            'type' => 'pengeluaran',
+            'category' => 'jumat_berkah',
+            'amount' => 1000000,
+            'transaction_date' => '2026-10-10',
+            'description' => '',
+        ]);
+
+        $response->assertSessionHasErrors('description');
+    }
+
+    public function test_income_transaction_requires_donor(): void
+    {
+        $admin = User::factory()->create(['peran' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.keuangan.store'), [
+            'type' => 'pemasukan',
+            'category' => 'jumat_berkah',
+            'amount' => 1000000,
+            'transaction_date' => '2026-10-10',
+            'donor_id' => null,
+        ]);
+
+        $response->assertSessionHasErrors('donor_id');
+    }
 }

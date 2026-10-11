@@ -334,41 +334,57 @@
         </tr>
     </table>
 
+    @php
+        $sumIncome = $transactions->where('type', 'pemasukan')->sum('amount');
+        $sumExpense = $transactions->where('type', 'pengeluaran')->sum('amount');
+        $netBalance = $sumIncome - $sumExpense;
+    @endphp
     <table class="summary-total-banner">
         <tr>
-            <td style="font-size: 8.5pt; text-transform: uppercase;">
-                {{ $categoryFilter ? 'Total Donasi Program Ini:' : 'Total Akumulasi Donasi Masuk:' }}
+            <td style="font-size: 8pt; text-transform: uppercase; width: 33%;">
+                Total Masuk: <strong class="font-mono" style="color: #007A4D;">Rp {{ number_format($sumIncome, 0, ',', '.') }}</strong>
             </td>
-            <td class="text-right font-mono" style="font-size: 11pt; color: #007A4D;">
-                Rp {{ number_format($totalNominal, 0, ',', '.') }}
+            <td style="font-size: 8pt; text-transform: uppercase; width: 33%;">
+                Total Keluar: <strong class="font-mono" style="color: #DC2626;">Rp {{ number_format($sumExpense, 0, ',', '.') }}</strong>
+            </td>
+            <td class="text-right font-mono" style="font-size: 9.5pt; color: #0F172A; width: 34%;">
+                Saldo: <strong>Rp {{ number_format($netBalance, 0, ',', '.') }}</strong>
             </td>
         </tr>
     </table>
 
     <!-- RINCIAN RIWAYAT TRANSAKSI -->
-    <div class="section-heading">II. Rincian Riwayat Transaksi Donasi</div>
+    <div class="section-heading">II. Rincian Riwayat Transaksi Keuangan (Masuk & Keluar)</div>
     <table class="data-table">
         <thead>
             <tr>
                 <th style="width: 28px;" class="text-center">No</th>
                 <th style="width: 70px;" class="text-center">Tanggal</th>
-                <th>Nama Donatur</th>
+                <th>Pihak / Donatur</th>
                 <th style="width: 120px;">Kategori Program</th>
-                <th style="width: 55px;" class="text-center">Jenis</th>
-                <th style="width: 95px;" class="text-right">Nominal (Rp)</th>
+                <th style="width: 60px;" class="text-center">Jenis</th>
+                <th style="width: 100px;" class="text-right">Nominal (Rp)</th>
             </tr>
         </thead>
         <tbody>
-            @php $subtotal = 0; @endphp
             @forelse ($transactions as $idx => $t)
-                @php $subtotal += $t->amount; @endphp
                 <tr class="{{ $idx % 2 === 1 ? 'even' : '' }}">
                     <td class="text-center font-mono">{{ $idx + 1 }}</td>
                     <td class="text-center font-mono">
                         {{ $t->transaction_date ? $t->transaction_date->format('d/m/Y') : '-' }}
                     </td>
                     <td>
-                        <strong>{{ $t->donor->nama_donatur ?? 'Hamba Allah' }}</strong>
+                        @if ($t->type === 'pengeluaran')
+                            <span style="color: #475569; font-weight: bold;">[Internal Yayasan]</span>
+                            @if ($t->description)
+                                <br><span style="font-size: 7.5pt; color: #334155;">{{ $t->description }}</span>
+                            @endif
+                        @else
+                            <strong>{{ $t->donor->nama_donatur ?? 'Donatur Valid' }}</strong>
+                            @if ($t->description)
+                                <br><span style="font-size: 7.5pt; color: #64748B;">{{ $t->description }}</span>
+                            @endif
+                        @endif
                     </td>
                     <td>
                         {{ $t->category_label ?: match ($t->category) {
@@ -379,10 +395,12 @@
                         } }}
                     </td>
                     <td class="text-center">
-                        <span class="badge-type">{{ $t->type }}</span>
+                        <span class="badge-type" style="{{ $t->type === 'pengeluaran' ? 'background-color: #FEE2E2; color: #B91C1C;' : 'background-color: #DCFCE7; color: #15803D;' }}">
+                            {{ ucfirst($t->type) }}
+                        </span>
                     </td>
-                    <td class="text-right font-mono">
-                        <strong>{{ number_format($t->amount, 0, ',', '.') }}</strong>
+                    <td class="text-right font-mono" style="{{ $t->type === 'pengeluaran' ? 'color: #DC2626;' : 'color: #007A4D;' }}">
+                        <strong>{{ $t->type === 'pengeluaran' ? '- ' : '+ ' }}{{ number_format($t->amount, 0, ',', '.') }}</strong>
                     </td>
                 </tr>
             @empty
@@ -396,10 +414,10 @@
         <tfoot>
             <tr>
                 <td colspan="5" class="text-right" style="text-transform: uppercase; font-size: 8pt;">
-                    Total Transaksi Tertera:
+                    Sisa Saldo Kas Transaksi Tertera:
                 </td>
                 <td class="text-right font-mono" style="font-size: 9.5pt;">
-                    Rp {{ number_format($subtotal, 0, ',', '.') }}
+                    <strong>Rp {{ number_format($netBalance, 0, ',', '.') }}</strong>
                 </td>
             </tr>
         </tfoot>
