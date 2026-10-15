@@ -9,6 +9,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Validation\ValidationException;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ArticleResource extends Resource
 {
@@ -32,7 +34,8 @@ class ArticleResource extends Resource
                     ->maxLength(255)
                     ->label('Judul Artikel'),
                 Forms\Components\FileUpload::make('header_image')
-                    ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->maxSize(5120)
                     ->directory('articles')
                     ->label('Gambar Header'),
                 Forms\Components\DateTimePicker::make('published_at')
@@ -46,6 +49,18 @@ class ArticleResource extends Resource
                 Forms\Components\RichEditor::make('content')
                     ->required()
                     ->columnSpanFull()
+                    ->saveUploadedFileAttachmentsUsing(function (TemporaryUploadedFile $file, Forms\Components\RichEditor $component): string {
+                        // Lampiran disajikan dari disk publik; SVG/HTML bisa berisi script, jadi hanya gambar raster.
+                        if (! in_array($file->getMimeType(), ['image/jpeg', 'image/png', 'image/webp', 'image/gif'], true)) {
+                            throw ValidationException::withMessages([
+                                $component->getStatePath() => 'Lampiran harus berupa gambar JPG, PNG, WEBP, atau GIF.',
+                            ]);
+                        }
+
+                        $storeMethod = $component->getFileAttachmentsVisibility() === 'public' ? 'storePublicly' : 'store';
+
+                        return $file->{$storeMethod}($component->getFileAttachmentsDirectory(), $component->getFileAttachmentsDiskName());
+                    })
                     ->label('Konten Artikel'),
             ]);
     }

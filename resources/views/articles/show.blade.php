@@ -151,7 +151,7 @@
             'url' => asset('images/logo-bun.webp'),
         ],
     ],
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_HEX_TAG) !!}
 </script>
     <script type="application/ld+json">
 {!! json_encode([
@@ -177,6 +177,6 @@
             'item' => route('artikel.show', $article->slug),
         ],
     ],
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_HEX_TAG) !!}
 </script>
 @endpush

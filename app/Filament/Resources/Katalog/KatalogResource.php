@@ -33,7 +33,8 @@ class KatalogResource extends Resource
                     ->maxLength(100)
                     ->label('Judul Katalog'),
                 Forms\Components\FileUpload::make('gambar')
-                    ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->maxSize(5120)
                     ->directory('katalog')
                     ->label('Gambar Katalog'),
                 Forms\Components\TextInput::make('target_penerima')

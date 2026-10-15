@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
 
         // 3. Rekening Bank Donasi Yayasan
         RekeningBank::firstOrCreate(
-            ['nomor_rekening' => '7123456789'],
+            ['nomor_rekening' => '71234132131'],
             [
                 'nama_bank' => 'Bank Syariah Indonesia (BSI)',
                 'atas_nama' => 'Yayasan Bakti Umat Nusantara',
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
         );
 
         RekeningBank::firstOrCreate(
-            ['nomor_rekening' => '7719-01-013298-53-7'],
+            ['nomor_rekening' => '771123123-53-7'],
             [
                 'nama_bank' => 'Bank BRI',
                 'atas_nama' => 'Yayasan Bakti Umat Nusantara',

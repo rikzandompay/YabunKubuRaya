@@ -86,7 +86,8 @@
                         @forelse($items as $item)
                             <tr class="hover:bg-[#F8FAFC]/50 transition-colors">
                                 <td class="px-4 py-3 whitespace-nowrap">
-                                    <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" class="w-12 h-12 rounded-lg object-cover border border-[#CBD5E1]">
+                                    <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}"
+                                        class="w-12 h-12 rounded-lg object-cover border border-[#CBD5E1]">
                                 </td>
                                 <td class="px-4 py-3 font-medium text-[#065F46] whitespace-nowrap">
                                     {{ $item->program?->nama_program ?? 'Program Umum' }}
@@ -115,8 +116,10 @@
                                         })"
                                         class="p-1.5 text-[#065F46] hover:bg-emerald-50 rounded-md transition-colors inline-block"
                                         title="Edit Item Katalog">
-                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                         </svg>
                                     </button>
 
@@ -168,7 +171,8 @@
                     </button>
                 </div>
 
-                <form method="POST" action="{{ route('admin.katalog.store') }}" enctype="multipart/form-data" class="space-y-4">
+                <form method="POST" action="{{ route('admin.katalog.store') }}" enctype="multipart/form-data"
+                    class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-xs font-medium text-[#1E293B] mb-1">Pilih Program Induk</label>
@@ -225,10 +229,8 @@
         </div>
 
         {{-- Modal Edit Katalog --}}
-        <div x-data="{ show: false, item: {} }"
-            @open-modal-edit-katalog.window="show = true; item = $event.detail"
-            x-show="show" x-cloak
-            class="fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4"
+        <div x-data="{ show: false, item: {} }" @open-modal-edit-katalog.window="show = true; item = $event.detail" x-show="show"
+            x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4"
             @keydown.escape.window="show = false">
             <div @click.away="show = false"
                 class="bg-white rounded-xl max-w-lg w-full p-6 shadow-xl border border-[#E2E8F0] space-y-4">
@@ -241,7 +243,8 @@
                     </button>
                 </div>
 
-                <form method="POST" :action="`/admin/katalog/${item.id}`" enctype="multipart/form-data" class="space-y-4">
+                <form method="POST" :action="`/admin/katalog/${item.id}`" enctype="multipart/form-data"
+                    class="space-y-4">
                     @csrf
                     @method('PUT')
 
@@ -264,7 +267,8 @@
                     <div>
                         <label class="block text-xs font-medium text-[#1E293B] mb-1">Gambar Saat Ini</label>
                         <template x-if="item.gambar_url">
-                            <img :src="item.gambar_url" class="w-20 h-20 rounded-lg object-cover border border-[#CBD5E1] mb-2" alt="Gambar">
+                            <img :src="item.gambar_url"
+                                class="w-20 h-20 rounded-lg object-cover border border-[#CBD5E1] mb-2" alt="Gambar">
                         </template>
                         <input type="file" name="gambar" accept="image/*"
                             class="w-full px-3 py-1.5 text-xs text-[#64748B] bg-white border border-[#CBD5E1] rounded-lg file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-[#065F46] hover:file:bg-emerald-100">

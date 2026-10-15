@@ -53,7 +53,7 @@
             @forelse($donors as $index => $donor)
                 <div
                     class="flex items-center gap-3 p-2 rounded-lg hover:bg-[#F8FAFC] dark:hover:bg-slate-800/50 transition-colors"
-                    x-show="!donorSearch || '{{ strtolower($donor['name']) }}'.includes(donorSearch.toLowerCase())"
+                    x-show="!donorSearch || @js(strtolower($donor['name'])).includes(donorSearch.toLowerCase())"
                 >
                     {{-- Rank badge --}}
                     <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 text-xs font-bold

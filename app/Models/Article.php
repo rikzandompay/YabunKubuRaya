@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class Article extends Model
 {
@@ -67,6 +68,21 @@ class Article extends Model
     public function programCategory(): BelongsTo
     {
         return $this->belongsTo(ProgramCategory::class);
+    }
+
+    /**
+     * Konten dirender mentah ({!! !!}) di halaman publik, jadi selalu disaring:
+     * saat disimpan (controller admin & panel Filament) dan saat dibaca
+     * (data lama yang tersimpan sebelum penyaringan ini ada).
+     */
+    public function setContentAttribute(?string $value): void
+    {
+        $this->attributes['content'] = $value === null ? null : Str::sanitizeHtml($value);
+    }
+
+    public function getContentAttribute(?string $value): ?string
+    {
+        return $value === null ? null : Str::sanitizeHtml($value);
     }
 
     public function getHeaderImageUrlAttribute(): string

@@ -49,7 +49,7 @@ class GalleryPhotoResource extends Resource
 
                 Forms\Components\FileUpload::make('image_path')
                     ->label('File Foto')
-                    ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                     ->disk('public')
                     ->directory('gallery')
                     ->maxSize(5120)

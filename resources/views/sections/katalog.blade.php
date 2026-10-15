@@ -2,8 +2,8 @@
     $defaultKatalogItems = [
         [
             'id' => 0,
-            'title' => 'Jumat Berkah',
-            'desc' => 'Berbagi makanan dan kebaikan setiap Jumat untuk masyarakat yang membutuhkan.',
+            'title' => 'Jumat Berokah',
+            'desc' => "Majelis do'a dan dzikir Jumat bersama anak anak Yatim dan dhuafa binaan Yabun",
             'image' => asset('images/santri-yabun.webp'),
             'image_fallback' => asset('images/santri-yabun.jpeg'),
             'link' => '#donasi',
@@ -19,7 +19,7 @@
         [
             'id' => 2,
             'title' => 'Santunan Yatim',
-            'desc' => 'Santunan rutin dan pendampingan kasih sayang untuk masa depan anak-anak yatim dhuafa.',
+            'desc' => 'Santunan Untuk anak anak Yatim binaan',
             'image' => 'https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=1200',
             'image_fallback' =>
                 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1200',
@@ -44,7 +44,7 @@
         ],
     ];
 
-    $katalogItems = (!empty($katalogItems) && is_array($katalogItems)) ? $katalogItems : $defaultKatalogItems;
+    $katalogItems = !empty($katalogItems) && is_array($katalogItems) ? $katalogItems : $defaultKatalogItems;
 @endphp
 
 <style>
@@ -602,8 +602,7 @@
         <!-- Foto Dokumentasi Program: Berganti Otomatis Sesuai Kartu Aktif -->
         <div class="katalog-photo-col" id="katalogPhotoContainer">
             @foreach ($katalogItems as $idx => $item)
-                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}"
-                    width="500" height="600"
+                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" width="500" height="600"
                     class="katalog-photo-img {{ $idx === 0 ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 pointer-events-none z-0' }}"
                     data-photo-id="{{ $item['id'] }}"
                     onerror="this.onerror=null; this.src='{{ $item['image_fallback'] }}';"

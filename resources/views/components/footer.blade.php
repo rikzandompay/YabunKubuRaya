@@ -167,9 +167,9 @@
                                 </div>
                                 <button type="button" x-data="{ copied: false }"
                                     @click="
-                                        navigator.clipboard.writeText('{{ $cleanNum }}');
+                                        navigator.clipboard.writeText(@js($cleanNum));
                                         copied = true;
-                                        if (typeof copyToClipboard === 'function') copyToClipboard('{{ $cleanNum }}', '{{ $bank->nama_bank }}');
+                                        if (typeof copyToClipboard === 'function') copyToClipboard(@js($cleanNum), @js($bank->nama_bank));
                                         setTimeout(() => copied = false, 2000);
                                     "
                                     class="inline-flex items-center gap-1 text-xs text-gray-300 hover:text-white bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded font-medium cursor-pointer transition-colors"

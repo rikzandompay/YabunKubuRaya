@@ -150,7 +150,7 @@
                     <tr
                         class="border-b border-[#F1F5F9] dark:border-slate-800/80 transition-colors"
                         :class="selected.includes('{{ $donation['id'] }}') ? 'bg-[#065F46]/5 dark:bg-emerald-950/30 border-l-2 border-l-[#065F46] dark:border-l-emerald-400' : 'hover:bg-[#F8FAFC] dark:hover:bg-slate-800/40'"
-                        x-show="matchesFilters('{{ $donation['id'] }}', '{{ $donation['donor_name'] }}', '{{ $donation['type'] }}', '{{ $donation['status'] }}')"
+                        x-show="matchesFilters(@js($donation['id']), @js($donation['donor_name']), @js($donation['type']), @js($donation['status']))"
                     >
                         <td class="px-3 py-3">
                             <label class="sr-only">Pilih donasi #{{ $donation['id'] }}</label>

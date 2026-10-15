@@ -4,7 +4,7 @@
 <section id="profile" class="bg-white py-20 md:py-28 border-b border-gray-100">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            
+
             <!-- Left Column: Narasi Sejarah Yayasan -->
             <div data-reveal="left" data-reveal-duration="600">
                 <h2 class="mb-6 text-3xl font-extrabold tracking-tight text-[#1F2937] lg:text-4xl">
@@ -12,29 +12,36 @@
                 </h2>
                 <div class="space-y-4 text-[15px] font-normal leading-[1.8] text-[#4B5563] text-justify">
                     <p>
-                        Yayasan Bakti Umat Nusantara mengawali berdirinya sejak tahun 2017 silam di Kota Depok, Jawa Barat.
+                        Yayasan Bakti Umat Nusantara Cabang Kubu Raya mengawali kiprahnya sejak tahun 2020 di Desa Parit
+                        Baru, Kecamatan Sungai Raya, Kabupaten Kubu Raya. Kehadirannya lahir dari kepedulian para
+                        inisiator terhadap pendidikan anak-anak dan dinamika sosial di kawasan penyangga Kota Pontianak.
                     </p>
                     <p>
-                        Awalnya, ide pendirian Yayasan ini dilaksanakan oleh Ketua Umum yang saat itu menjadi salah seorang ustadz kondang. Beliau ingin menjawab banyak kebutuhan terutama kepada kecintaannya terhadap Al-Qur'an dan Sunnah.
+                        Dengan bimbingan dari Yabun pusat di Depok, langkah awal diwujudkan secara swadaya melalui
+                        santunan bagi yatim dhuafa serta pembukaan TPQ untuk pendidikan Al-Qur'an dan budi pekerti.
+                        Antusiasme masyarakat yang tinggi menjadi dorongan kuat bagi yayasan untuk terus meluaskan
+                        manfaat keberkahan.
+                    </p>
+                    <p>Alhamdulillah kegiatan berjalan dan respon masyarakat sangat antusias.
+                        YBUN bisa mengisi kekosongan kebutuhan masyarakat di kehidupan sosial dan karena dilatar
+                        belakangi
+                        dengan kecintaannya terhadap Al-Qur'an dan Sunnah.
                     </p>
                     <p>
-                        Pendidikan dan budi pekerti jadi salah satu fokusnya dalam mendidik generasi islami yang berbudi luhur. Oleh karenanya, Yayasan Bakti Umat Nusantara sejak awal berdirinya telah banyak membawa manfaat dan menebarkan keberkahan bagi umat hingga kini.
-                    </p>
-                    <p>
-                        Yayasan kini telah membina generasi penghafal 30 Juz Al-Qur'an sesuai dengan cita-cita mulia para pendiri. Alhamdulillah berkat doa dan dukungan para donatur, Yayasan Bakti Umat Nusantara terus berkhidmat melayani sesama hingga pelosok Nusantara, termasuk di Cabang Kubu Raya. Wallahu a'lam bishawab.
+                        Kini, Yayasan Bakti Umat Nusantara aktif membina generasi penghafal 30 Juz Al-Qur'an dan
+                        berikhtiar mendirikan Pondok Pesantren Tahfizh di Kalimantan Barat. Berbekal doa serta dukungan
+                        para donatur dan masyarakat, yayasan senantiasa teguh mengemban motonya: <em>&ldquo;Bersama
+                            Masyarakat Membangun Peradaban&rdquo;</em>.
                     </p>
                 </div>
             </div>
 
             <!-- Right Column: Santri Yabun -->
-            <div class="relative w-full max-w-[600px] mx-auto overflow-hidden rounded-2xl border border-gray-100" data-reveal="right" data-reveal-duration="600" data-reveal-delay="200">
-                <img
-                    src="{{ asset('images/santri-yabun.webp') }}"
-                    alt="Santri Yayasan Bakti Umat Nusantara"
+            <div class="relative w-full max-w-[600px] mx-auto overflow-hidden rounded-2xl border border-gray-100"
+                data-reveal="right" data-reveal-duration="600" data-reveal-delay="200">
+                <img src="{{ asset('images/santri-yabun.webp') }}" alt="Santri Yayasan Bakti Umat Nusantara"
                     class="w-full aspect-[16/10] object-cover"
-                    onerror="this.src='{{ asset('images/santri-yabun.jpeg') }}'"
-                    loading="lazy"
-                />
+                    onerror="this.src='{{ asset('images/santri-yabun.jpeg') }}'" loading="lazy" />
             </div>
 
         </div>

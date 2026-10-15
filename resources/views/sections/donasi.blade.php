@@ -53,7 +53,7 @@
                             </p>
                         </div>
                     </div>
-                    <button type="button" onclick="copyToClipboard('{{ $cleanNumber }}', '{{ $bank->nama_bank }}')"
+                    <button type="button" onclick="copyToClipboard(@js($cleanNumber), @js($bank->nama_bank))"
                         class="shrink-0 inline-flex items-center justify-center gap-2 border border-gray-300 hover:border-[#007A4D] hover:text-[#007A4D] text-gray-700 font-semibold text-xs sm:text-sm px-5 py-2 rounded-md transition-colors cursor-pointer bg-white">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"

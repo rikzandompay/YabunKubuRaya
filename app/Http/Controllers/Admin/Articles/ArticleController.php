@@ -55,25 +55,7 @@ class ArticleController extends Controller
             $imagePath = $request->file('header_image')->store('articles', 'public');
         }
 
-        $cleanContent = strip_tags($validated['content'], '<p><br><b><strong><i><em><u><h2><h3><h4><h5><h6><ul><ol><li><blockquote><a><img><figure><figcaption><table><thead><tbody><tr><th><td><span><div><pre><code>');
-
-        // Remove all event handler attributes (on*)
-        $cleanContent = preg_replace('/\\s+on[A-Za-z]+\\s*=\\s*(?:"[^"]*"|\'[^\']*\'|[^\\s>]+)/i', '', $cleanContent);
-
-        // Neutralize dangerous protocols in href/src
-        $cleanContent = preg_replace_callback(
-            '/(href|src)\\s*=\\s*(["\']?)([^"\'>\\s]+)\\2/i',
-            function ($m) {
-                $url = html_entity_decode($m[3], ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                $url = urldecode($url);
-                if (preg_match('/^(javascript|vbscript|data\\s*:(?:text|image\\/svg))/i', trim($url))) {
-                    return $m[1].'="#"';
-                }
-
-                return $m[0];
-            },
-            $cleanContent
-        );
+        $cleanContent = Str::sanitizeHtml($validated['content']);
 
         Article::create([
             'program_category_id' => $validated['program_category_id'],
@@ -108,21 +90,7 @@ class ArticleController extends Controller
             'is_published' => 'nullable|boolean',
         ]);
 
-        $cleanContent = strip_tags($validated['content'], '<p><br><b><strong><i><em><u><h2><h3><h4><h5><h6><ul><ol><li><blockquote><a><img><figure><figcaption><table><thead><tbody><tr><th><td><span><div><pre><code>');
-        $cleanContent = preg_replace('/\\s+on[A-Za-z]+\\s*=\\s*(?:"[^"]*"|\'[^\']*\'|[^\\s>]+)/i', '', $cleanContent);
-        $cleanContent = preg_replace_callback(
-            '/(href|src)\\s*=\\s*(["\']?)([^"\'>\\s]+)\\2/i',
-            function ($m) {
-                $url = html_entity_decode($m[3], ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                $url = urldecode($url);
-                if (preg_match('/^(javascript|vbscript|data\\s*:(?:text|image\\/svg))/i', trim($url))) {
-                    return $m[1].'="#"';
-                }
-
-                return $m[0];
-            },
-            $cleanContent
-        );
+        $cleanContent = Str::sanitizeHtml($validated['content']);
 
         $updateData = [
             'program_category_id' => $validated['program_category_id'],
