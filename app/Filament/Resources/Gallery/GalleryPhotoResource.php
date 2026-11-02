@@ -9,6 +9,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class GalleryPhotoResource extends Resource
 {
@@ -50,6 +52,12 @@ class GalleryPhotoResource extends Resource
                 Forms\Components\FileUpload::make('image_path')
                     ->label('File Foto')
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->rules(['extensions:jpg,jpeg,png,webp'])
+                    ->getUploadedFileNameForStorageUsing(fn (TemporaryUploadedFile $file): string => Str::random(40).'.'.match ($file->getMimeType()) {
+                        'image/jpeg' => 'jpg',
+                        'image/png' => 'png',
+                        'image/webp' => 'webp',
+                    })
                     ->disk('public')
                     ->directory('gallery')
                     ->maxSize(5120)

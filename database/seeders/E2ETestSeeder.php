@@ -14,6 +14,7 @@ use App\Models\RekeningBank;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use RuntimeException;
 
 class E2ETestSeeder extends Seeder
 {
@@ -22,6 +23,10 @@ class E2ETestSeeder extends Seeder
      */
     public function run(): void
     {
+        if (! app()->environment('local', 'testing')) {
+            throw new RuntimeException('E2ETestSeeder may only run in local or testing environments.');
+        }
+
         // 1. Admin Akun Test E2E (Dummy)
         User::updateOrCreate(
             ['email' => 'admin@example.com'],

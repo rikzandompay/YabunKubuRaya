@@ -416,10 +416,17 @@ class DashboardController extends Controller
                 'Nominal (Rp)',
                 'Status',
                 'Keterangan',
-            ], ';');
+            ], ';', '"', '');
 
             foreach ($transactions as $index => $tx) {
-                fputcsv($handle, [
+                fputcsv($handle, array_map(static function (string|int|float $value): string|int|float {
+                    // CSV quoting alone does not stop spreadsheets from evaluating formulas.
+                    if (is_string($value) && preg_match('/\A[\x00-\x20]*[=+\-@]|\A[\t\r\n]/', $value)) {
+                        return "'".$value;
+                    }
+
+                    return $value;
+                }, [
                     $index + 1,
                     'DN-'.str_pad((string) $tx->id, 4, '0', STR_PAD_LEFT),
                     $tx->transaction_date?->format('d/m/Y') ?? '-',
@@ -430,7 +437,7 @@ class DashboardController extends Controller
                     (float) $tx->amount,
                     'Terverifikasi',
                     $tx->description ?? '-',
-                ], ';');
+                ]), ';', '"', '');
             }
 
             fclose($handle);

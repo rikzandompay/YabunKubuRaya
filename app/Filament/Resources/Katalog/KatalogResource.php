@@ -9,6 +9,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class KatalogResource extends Resource
 {
@@ -34,6 +36,12 @@ class KatalogResource extends Resource
                     ->label('Judul Katalog'),
                 Forms\Components\FileUpload::make('gambar')
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->rules(['extensions:jpg,jpeg,png,webp'])
+                    ->getUploadedFileNameForStorageUsing(fn (TemporaryUploadedFile $file): string => Str::random(40).'.'.match ($file->getMimeType()) {
+                        'image/jpeg' => 'jpg',
+                        'image/png' => 'png',
+                        'image/webp' => 'webp',
+                    })
                     ->maxSize(5120)
                     ->directory('katalog')
                     ->label('Gambar Katalog'),

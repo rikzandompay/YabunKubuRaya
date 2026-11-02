@@ -14,11 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // SECURITY: Trust reverse proxy (Cloudflare/CDN/Tunnel) untuk mendeteksi HTTPS & client IP dengan benar.
-        $trustedProxies = env('TRUSTED_PROXIES', '*');
-        if ($trustedProxies) {
-            $middleware->trustProxies(at: $trustedProxies === '*' ? '*' : explode(',', $trustedProxies));
-        }
+        $middleware->trustProxies(headers: Request::HEADER_X_FORWARDED_FOR | Request::HEADER_X_FORWARDED_PROTO | Request::HEADER_X_FORWARDED_PORT);
 
         // SECURITY: Alias middleware untuk role-based access control
         $middleware->alias([

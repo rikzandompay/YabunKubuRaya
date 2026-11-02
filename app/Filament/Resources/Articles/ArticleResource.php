@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
@@ -35,6 +36,12 @@ class ArticleResource extends Resource
                     ->label('Judul Artikel'),
                 Forms\Components\FileUpload::make('header_image')
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->rules(['extensions:jpg,jpeg,png,webp'])
+                    ->getUploadedFileNameForStorageUsing(fn (TemporaryUploadedFile $file): string => Str::random(40).'.'.match ($file->getMimeType()) {
+                        'image/jpeg' => 'jpg',
+                        'image/png' => 'png',
+                        'image/webp' => 'webp',
+                    })
                     ->maxSize(5120)
                     ->directory('articles')
                     ->label('Gambar Header'),
@@ -51,7 +58,10 @@ class ArticleResource extends Resource
                     ->columnSpanFull()
                     ->saveUploadedFileAttachmentsUsing(function (TemporaryUploadedFile $file, Forms\Components\RichEditor $component): string {
                         // Lampiran disajikan dari disk publik; SVG/HTML bisa berisi script, jadi hanya gambar raster.
-                        if (! in_array($file->getMimeType(), ['image/jpeg', 'image/png', 'image/webp', 'image/gif'], true)) {
+                        if (
+                            ! in_array($file->getMimeType(), ['image/jpeg', 'image/png', 'image/webp', 'image/gif'], true) ||
+                            ! in_array(strtolower($file->getClientOriginalExtension()), ['jpg', 'jpeg', 'png', 'webp', 'gif'], true)
+                        ) {
                             throw ValidationException::withMessages([
                                 $component->getStatePath() => 'Lampiran harus berupa gambar JPG, PNG, WEBP, atau GIF.',
                             ]);

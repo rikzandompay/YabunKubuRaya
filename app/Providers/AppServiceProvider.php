@@ -39,9 +39,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Force HTTPS URL generation when behind SSL reverse proxy / tunnel or on production domain
         $isLocalHost = in_array(request()->getHost(), ['127.0.0.1', 'localhost']);
-        $isHttpsForwarded = request()->header('x-forwarded-proto') === 'https' || request()->server('HTTP_X_FORWARDED_PROTO') === 'https';
-
-        if ($isHttpsForwarded || request()->isSecure() || ($this->app->environment('production') && ! $isLocalHost)) {
+        if (request()->isSecure() || ($this->app->environment('production') && ! $isLocalHost)) {
             URL::forceScheme('https');
         }
 

@@ -20,15 +20,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Akun Admin Default (Dummy / Percontohan)
-        User::firstOrCreate(
-            ['email' => 'admin@example.com'],
-            [
-                'nama' => 'Administrator Simulasi',
-                'kata_sandi' => Hash::make('password'),
-                'peran' => 'superadmin',
-                'email_diverifikasi_pada' => now(),
-            ]
-        );
+        if (app()->environment('local', 'testing')) {
+            User::firstOrCreate(
+                ['email' => 'admin@example.com'],
+                [
+                    'nama' => 'Administrator Simulasi',
+                    'kata_sandi' => Hash::make('password'),
+                    'peran' => 'superadmin',
+                    'email_diverifikasi_pada' => now(),
+                ]
+            );
+        }
 
         // 2. Program Utama Sesuai PRD
         $programs = [
