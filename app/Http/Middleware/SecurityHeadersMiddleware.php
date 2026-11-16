@@ -27,17 +27,16 @@ class SecurityHeadersMiddleware
         // Upgrade path: pindah ke Alpine CSP build + nonce untuk <script> inline, lalu buang 'unsafe-inline'/'unsafe-eval'.
         $response->headers->set('Content-Security-Policy', implode('; ', [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.cloudflareinsights.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' data: https://fonts.gstatic.com",
             "img-src 'self' data: blob: https://images.unsplash.com",
-            "connect-src 'self'",
+            "connect-src 'self' https://cloudflareinsights.com",
             'frame-src https://maps.google.com https://www.google.com',
             "form-action 'self'",
             "frame-ancestors 'self'",
             "base-uri 'self'",
             "object-src 'none'",
-            "require-trusted-types-for 'script'",
         ]));
 
         return $response;
