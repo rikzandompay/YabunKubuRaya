@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -284,5 +285,36 @@ class SecurityHardeningTest extends TestCase
             'alamat' => 'Pontianak',
         ]);
         $response->assertStatus(403);
+    }
+
+    public function test_content_security_policy_header_is_present(): void
+    {
+        $response = $this->get('/');
+
+        $csp = (string) $response->headers->get('Content-Security-Policy');
+
+        $this->assertStringContainsString("default-src 'self'", $csp);
+        $this->assertStringContainsString("object-src 'none'", $csp);
+        $this->assertStringContainsString("base-uri 'self'", $csp);
+        $this->assertStringContainsString("frame-ancestors 'self'", $csp);
+    }
+
+    public function test_forbidden_response_does_not_leak_role_name(): void
+    {
+        $pengurus = User::factory()->create(['peran' => 'pengurus']);
+
+        $response = $this->actingAs($pengurus)->get(route('admin.dashboard'));
+
+        $response->assertStatus(403);
+        $response->assertDontSee('pengurus');
+    }
+
+    public function test_html_sanitizer_strips_javascript_urls_in_srcset(): void
+    {
+        $sanitized = Str::sanitizeHtml(
+            '<img srcset="javascript:alert(1) 1x"><source srcset="javascript:alert(2)">'
+        );
+
+        $this->assertStringNotContainsString('javascript:', $sanitized);
     }
 }

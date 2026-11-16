@@ -15,10 +15,7 @@ use App\Policies\FinancialTransactionPolicy;
 use App\Policies\GalleryPhotoPolicy;
 use App\Policies\KatalogPolicy;
 use App\Policies\RekeningBankPolicy;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -50,11 +47,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Article::class, ArticlePolicy::class);
         Gate::policy(Katalog::class, KatalogPolicy::class);
         Gate::policy(RekeningBank::class, RekeningBankPolicy::class);
-
-        // SECURITY: Rate limit login attempts untuk mencegah brute force
-        RateLimiter::for('login', function (Request $request) {
-            return Limit::perMinute(5)->by($request->ip());
-        });
 
         // Bagikan data pengaturan profil yayasan dan rekening bank aktif ke landing page, components & footer
         view()->composer(['layouts.app', 'welcome', 'components.*', 'sections.*'], function ($view) {

@@ -22,7 +22,7 @@ class EnsureUserIsAdmin
         $userRole = auth()->user()->peran;
 
         if (! in_array($userRole, $allowedRoles, true)) {
-            abort(403, 'Anda tidak memiliki akses ke halaman administrasi. Role Anda: '.$userRole);
+            abort(403, 'Anda tidak memiliki akses ke halaman administrasi.');
         }
 
         return $next($request);
